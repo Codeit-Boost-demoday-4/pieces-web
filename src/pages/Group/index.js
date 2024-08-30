@@ -1,13 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper, Container } from './styles';
-import PostList
-import Button from '../ui/Button';
-import data from '../../data.json';
+import Button from '../../components/Button';
+import PostList from './components/PostList';
+import data from '../../dummyData/postData.json';
 
-
-
-function MainPage(props) {
+function Group(props) {
     const navigate = useNavigate();
 
     return (
@@ -31,4 +29,4 @@ function MainPage(props) {
     );
 }
 
-export default MainPage;
+export default Group;
