@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
-import './Home.css';
+import { Link } from "react-router-dom";
+import "./Home.css";
 import logo from "../../assets/logo.png";
 import profileLine from "../../assets/profile_line.png";
 import memoryList from "../../assets/추억목록.png";
@@ -78,45 +78,44 @@ const Home = () => {
       <img src={logo} alt="로고" className="logo" />
       <img src={profileLine} alt="프로필 선" className="profile-line" />
       <img src={memoryList} alt="추억 목록" className="memory-list" />
-
       <Link to="/memories">
         <img src={memoryUpload} alt="추억 올리기" className="memory-upload" />
       </Link>
-
-      <img src={toggleButton} alt="공개 비공개 버튼" className="toggle-button" />
+      <img
+        src={toggleButton}
+        alt="공개 비공개 버튼"
+        className="toggle-button"
+      />
       <img
         src={publicText}
         alt="공개 텍스트"
         className="public-text"
         onClick={handleShowPublic}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: "pointer" }}
       />
       <img
         src={privateText}
         alt="비공개 텍스트"
         className="private-text"
         onClick={handleShowPrivate}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: "pointer" }}
       />
-
       {/* 그룹 정보 수정 버튼 */}
       <div
         className="text-button"
         onClick={handleTextClick}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: "pointer" }}
       >
         그룹 정보 수정
       </div>
-
       {/* 그룹 삭제하기 버튼 */}
       <div
         className="delete-button"
         onClick={handleDeleteClick}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: "pointer" }}
       >
         그룹 삭제하기
       </div>
-
       {/* 공감 보내기 버튼 */}
       <img
         src={sympathyButton}
@@ -124,7 +123,6 @@ const Home = () => {
         className="sympathy-button"
         onClick={handleSympathyClick}
       />
-
       {/* 공감 애니메이션 */}
       {showSympathy && (
         <img
@@ -133,54 +131,79 @@ const Home = () => {
           className="sympathy-animation"
         />
       )}
-
       {/* 입력창 모달 */}
       {showModal && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2 className="modal-title">그룹 정보 수정</h2>
             <label className="modal-label">그룹명</label>
-            <input type="text" className="modal-input" placeholder="그룹명을 입력해 주세요" />
+            <input
+              type="text"
+              className="modal-input"
+              placeholder="그룹명을 입력해 주세요"
+            />
 
             <label className="modal-label">대표 이미지</label>
             <div className="image-upload">
-              <input type="text" className="modal-input image-input" placeholder="대표 이미지를 첨부해 주세요" />
+              <input
+                type="text"
+                className="modal-input image-input"
+                placeholder="대표 이미지를 첨부해 주세요"
+              />
               <button className="file-select-button">파일 선택</button>
             </div>
 
             <label className="modal-label">그룹 소개</label>
-            <textarea className="modal-textarea" placeholder="그룹을 소개해 주세요"></textarea>
+            <textarea
+              className="modal-textarea"
+              placeholder="그룹을 소개해 주세요"
+            ></textarea>
 
             <label className="modal-label">그룹 공개 선택</label>
             <div className="switch-container" onClick={handleSwitchToggle}>
-              <div className={`switch ${isSwitchOn ? 'on' : 'off'}`}>
+              <div className={`switch ${isSwitchOn ? "on" : "off"}`}>
                 <div className="switch-circle"></div>
               </div>
-              <span className="switch-label">{isSwitchOn ? '공개' : '비공개'}</span>
+              <span className="switch-label">
+                {isSwitchOn ? "공개" : "비공개"}
+              </span>
             </div>
 
             <label className="modal-label">수정 권한 인증</label>
-            <input type="password" className="modal-input" placeholder="비밀번호를 입력해 주세요" />
+            <input
+              type="password"
+              className="modal-input"
+              placeholder="비밀번호를 입력해 주세요"
+            />
 
-            <button className="edit-submit-button" onClick={handleEditSubmit}>수정하기</button>
+            <button className="edit-submit-button" onClick={handleEditSubmit}>
+              수정하기
+            </button>
 
-            {isEditSuccess && <div className="edit-success-message">수정이 완료되었습니다!</div>}
+            {isEditSuccess && (
+              <div className="edit-success-message">수정이 완료되었습니다!</div>
+            )}
           </div>
         </div>
       )}
-
       {/* 그룹 삭제 모달 */}
       {showDeleteModal && (
         <div className="modal-overlay" onClick={handleCloseDeleteModal}>
-          <div className="delete-modal-content" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="delete-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2 className="delete-modal-title">그룹 삭제</h2>
             <label className="delete-modal-label">삭제 권한 인증</label>
-            <input type="password" className="delete-modal-input" placeholder="비밀번호를 입력해 주세요" />
+            <input
+              type="password"
+              className="delete-modal-input"
+              placeholder="비밀번호를 입력해 주세요"
+            />
             <button className="delete-submit-button">삭제하기</button>
           </div>
         </div>
       )}
-
       {isPublicView ? (
         <>
           <img src={publicPost} alt="공개글1" className="public-post" />
@@ -195,25 +218,85 @@ const Home = () => {
         </>
       ) : (
         <>
-          <img src={privatePost} alt="비공개글1" className="private-post-group1-1" />
-          <img src={privatePost} alt="비공개글2" className="private-post-group1-2" />
-          <img src={privatePost} alt="비공개글3" className="private-post-group1-3" />
-          <img src={privatePost} alt="비공개글4" className="private-post-group1-4" />
+          <img
+            src={privatePost}
+            alt="비공개글1"
+            className="private-post-group1-1"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글2"
+            className="private-post-group1-2"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글3"
+            className="private-post-group1-3"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글4"
+            className="private-post-group1-4"
+          />
 
-          <img src={privatePost} alt="비공개글5" className="private-post-group2-1" />
-          <img src={privatePost} alt="비공개글6" className="private-post-group2-2" />
-          <img src={privatePost} alt="비공개글7" className="private-post-group2-3" />
-          <img src={privatePost} alt="비공개글8" className="private-post-group2-4" />
+          <img
+            src={privatePost}
+            alt="비공개글5"
+            className="private-post-group2-1"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글6"
+            className="private-post-group2-2"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글7"
+            className="private-post-group2-3"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글8"
+            className="private-post-group2-4"
+          />
 
-          <img src={privatePost} alt="비공개글9" className="private-post-group3-1" />
-          <img src={privatePost} alt="비공개글10" className="private-post-group3-2" />
-          <img src={privatePost} alt="비공개글11" className="private-post-group3-3" />
+          <img
+            src={privatePost}
+            alt="비공개글9"
+            className="private-post-group3-1"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글10"
+            className="private-post-group3-2"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글11"
+            className="private-post-group3-3"
+          />
 
-          <img src={privatePost} alt="비공개글12" className="private-post-group4-1" />
-          <img src={privatePost} alt="비공개글13" className="private-post-group4-2" />
-          <img src={privatePost} alt="비공개글14" className="private-post-group4-3" />
+          <img
+            src={privatePost}
+            alt="비공개글12"
+            className="private-post-group4-1"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글13"
+            className="private-post-group4-2"
+          />
+          <img
+            src={privatePost}
+            alt="비공개글14"
+            className="private-post-group4-3"
+          />
 
-          <img src={moreButton} alt="더보기 버튼" className="more-button-private" />
+          <img
+            src={moreButton}
+            alt="더보기 버튼"
+            className="more-button-private"
+          />
         </>
       )}
     </div>
