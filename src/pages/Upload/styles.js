@@ -59,7 +59,7 @@ export const Input = styled.input`
   border-radius: 6px;
   padding: 10px;
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
   &.image {
     width: 290px;
@@ -156,13 +156,13 @@ export const DeleteIcon = styled.img`
 export const ToggleContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `;
 
 export const ToggleWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 50px;
+  margin-left: 20px;
   cursor: pointer;
 `;
 
@@ -172,28 +172,28 @@ export const ToggleText = styled.span`
   font-size: 14px;
   color: #282828;
   margin-right: 10px;
+  width: 40px;
 `;
 
 export const ToggleSwitch = styled.div`
-  width: 40px;
-  height: 20px;
-  background-color: ${({ isPublic }) => (isPublic ? "#282828" : "#dddddd")};
-  border-radius: 12px;
+  width: 48px;
+  height: 24px;
+  background-color: ${({ $isPublic }) => ($isPublic ? "#282828" : "#dddddd")};
+  border-radius: 13px;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: ${({ isPublic }) => (isPublic ? "flex-start" : "flex-end")};
-  padding: 2px;
+  padding: 1px;
   transition: background-color 0.3s ease;
 `;
 
 export const SwitchHandle = styled.div`
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   background-color: white;
   border-radius: 50%;
   position: absolute;
   transition: transform 0.3s ease;
-  transform: ${({ isPublic }) =>
-    isPublic ? "translateX(0)" : "translateX(20px)"};
+  transform: ${({ $isPublic }) =>
+    $isPublic ? "translateX(0)" : "translateX(24px)"};
 `;

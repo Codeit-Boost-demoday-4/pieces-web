@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Container,
@@ -19,14 +19,14 @@ import {
   ToggleText,
   ToggleSwitch,
   SwitchHandle,
-} from "./styles";
+} from "./styles.js";
 import closeButton from "./assets/close-button.svg";
 import deleteTagImage from "../../assets/memories/태그삭제.png"; // 태그 삭제 버튼 이미지 불러오기
 import AuthModal from "./AuthModal/index.js";
 import { LogoTopBar } from "../../components/LogoTopBar.js";
 import axios from "axios";
 
-const Memories = () => {
+const Upload = () => {
   //const groupId = useParams(); // URL에서 groupId를 가져옴
   const groupId = 1;
   const nav = useNavigate();
@@ -43,9 +43,12 @@ const Memories = () => {
   const [content, setContent] = useState("");
   const [postPassword, setPostPassword] = useState("");
   const [groupPassword, setGroupPassword] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState([]);
   const [location, setLocation] = useState("");
   const [moment, setMoment] = useState("");
+
+  // Input 요소를 참조하기 위한 ref 설정
+  const fileInputRef = useRef(null);
 
   const toggleSwitch = () => {
     setIsPublic(!isPublic);
@@ -59,6 +62,20 @@ const Memories = () => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       setTags([...tags, inputValue]);
       setInputValue("");
+    }
+  };
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fileUrl = URL.createObjectURL(file);
+      setImageUrl(fileUrl); // 선택한 이미지의 URL을 상태에 저장
+    }
+  };
+
+  const triggerFileSelect = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
     }
   };
 
@@ -144,13 +161,17 @@ const Memories = () => {
           <Label>이미지</Label>
           <FileSelectContainer>
             <Input
-              className="image"
-              type="text"
-              placeholder="파일을 선택해 주세요"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
+              ref={fileInputRef}
+              //className="image"
+              type="file"
+              accept="image/*"
+              placeholder="파일을 선택해주세요"
+              onChange={handleFileSelect}
             />
-            <FileSelectButton>파일 선택</FileSelectButton>
+            {/*<FileSelectButton onClick={triggerFileSelect}>
+              파일 선택
+            </FileSelectButton>
+            */}
           </FileSelectContainer>
 
           <Label>본문</Label>
@@ -194,7 +215,7 @@ const Memories = () => {
 
           <Label>추억의 순간</Label>
           <Input
-            type="text"
+            type="date"
             placeholder="YYYY-MM-DD"
             value={moment}
             onChange={(e) => setMoment(e.target.value)}
@@ -204,8 +225,8 @@ const Memories = () => {
           <ToggleContainer>
             <ToggleText>{isPublic ? "공개" : "비공개"}</ToggleText>
             <ToggleWrapper onClick={toggleSwitch}>
-              <ToggleSwitch isPublic={isPublic}>
-                <SwitchHandle isPublic={isPublic} />
+              <ToggleSwitch $isPublic={isPublic}>
+                <SwitchHandle $isPublic={isPublic} />
               </ToggleSwitch>
             </ToggleWrapper>
           </ToggleContainer>
@@ -230,4 +251,4 @@ const Memories = () => {
   );
 };
 
-export default Memories;
+export default Upload;
