@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import './Home.css';
 import logo from "../../assets/logo.png";
@@ -21,13 +21,33 @@ import privatePost from "../../assets/비공개글.png";
 import sympathyButton from "../../assets/공감보내기.png";
 import sympathyAnimation from "../../assets/공감보내기클릭시.png";
 
+// 새로운 이미지 import
+import groupPhoto from "../../assets/그룹사진.png";
+
 const Home = () => {
   const [isPublicView, setIsPublicView] = useState(true);
   const [showSympathy, setShowSympathy] = useState(false);
-  const [showModal, setShowModal] = useState(false); // 입력창 상태 관리
-  const [isSwitchOn, setIsSwitchOn] = useState(true); // 스위치 상태 관리
-  const [isEditSuccess, setIsEditSuccess] = useState(false); // 수정 성공 메시지 상태 관리
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // 그룹 삭제 모달 상태 관리
+  const [showModal, setShowModal] = useState(false); 
+  const [isSwitchOn, setIsSwitchOn] = useState(true); 
+  const [isEditSuccess, setIsEditSuccess] = useState(false); 
+  const [showDeleteModal, setShowDeleteModal] = useState(false); 
+
+  useEffect(() => {
+    const scalePage = () => {
+      const scale = window.innerWidth / 1920; // 1920px 기준으로 스케일 계산
+      document.body.style.transform = `scale(${scale})`;
+      document.body.style.transformOrigin = 'top left'; // 기준점 설정
+      document.body.style.width = '1920px'; // 축소 후 너비 고정
+      document.body.style.height = 'auto'; // 필요시 자동 높이 설정
+    };
+
+    scalePage(); // 페이지 로드 시 스케일 조정
+    window.addEventListener('resize', scalePage); // 창 크기 조정 시 스케일 재적용
+
+    return () => {
+      window.removeEventListener('resize', scalePage);
+    };
+  }, []);
 
   const handleShowPublic = () => {
     setIsPublicView(true);
@@ -39,42 +59,41 @@ const Home = () => {
 
   const handleSympathyClick = () => {
     setShowSympathy(true);
-    setTimeout(() => setShowSympathy(false), 1000); // 1초 후 사라짐
+    setTimeout(() => setShowSympathy(false), 1000);
   };
 
   const handleTextClick = () => {
-    setShowModal(true); // 입력창을 보여줌
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowModal(false); // 입력창을 닫음
-    setIsEditSuccess(false); // 수정 성공 메시지 초기화
+    setShowModal(false);
+    setIsEditSuccess(false);
   };
 
   const handleSwitchToggle = () => {
-    setIsSwitchOn(!isSwitchOn); // 스위치 상태 토글
+    setIsSwitchOn(!isSwitchOn);
   };
 
   const handleEditSubmit = () => {
-    // 수정하기 버튼 클릭 시 로직 (이 부분에 수정 로직을 추가하면 됨)
     setIsEditSuccess(true);
     setTimeout(() => {
-      setShowModal(false); // 수정 완료 후 창 닫기
-      setIsEditSuccess(false); // 수정 성공 메시지 초기화
-    }, 2000); // 2초 후 창 닫기
+      setShowModal(false);
+      setIsEditSuccess(false);
+    }, 2000);
   };
 
   const handleDeleteClick = () => {
-    setShowDeleteModal(true); // 그룹 삭제 모달 열기
+    setShowDeleteModal(true);
   };
 
   const handleCloseDeleteModal = () => {
-    setShowDeleteModal(false); // 그룹 삭제 모달 닫기
+    setShowDeleteModal(false);
   };
 
   return (
     <div className="home-container">
-      <div className="background-layer"></div> {/* 빈 배경 추가 */}
+      <div className="background-layer"></div>
       <img src={logo} alt="로고" className="logo" />
       <img src={profileLine} alt="프로필 선" className="profile-line" />
       <img src={memoryList} alt="추억 목록" className="memory-list" />
@@ -99,7 +118,6 @@ const Home = () => {
         style={{ cursor: 'pointer' }}
       />
 
-      {/* 그룹 정보 수정 버튼 */}
       <div
         className="text-button"
         onClick={handleTextClick}
@@ -108,7 +126,22 @@ const Home = () => {
         그룹 정보 수정
       </div>
 
-      {/* 그룹 삭제하기 버튼 */}
+      <div className="dday-description">
+      D+265
+      </div>
+      
+      <div className="status-public">
+      |&nbsp;&nbsp;&nbsp;공개
+      </div>
+
+      <div className="memory-count">
+      추억 8
+      </div>
+
+      <div className="group-sympathy">
+      |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그룹 공감 23
+      </div>
+
       <div
         className="delete-button"
         onClick={handleDeleteClick}
@@ -117,7 +150,12 @@ const Home = () => {
         그룹 삭제하기
       </div>
 
-      {/* 공감 보내기 버튼 */}
+      {/* 여기서부터 "달봉이네 가족" 텍스트 추가 */}
+      <div className="family-text">
+      달봉이네 가족
+      </div>
+      {/* 여기까지 "달봉이네 가족" 텍스트 추가 */}
+
       <img
         src={sympathyButton}
         alt="공감 보내기 버튼"
@@ -125,7 +163,6 @@ const Home = () => {
         onClick={handleSympathyClick}
       />
 
-      {/* 공감 애니메이션 */}
       {showSympathy && (
         <img
           src={sympathyAnimation}
@@ -134,7 +171,6 @@ const Home = () => {
         />
       )}
 
-      {/* 입력창 모달 */}
       {showModal && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -169,7 +205,6 @@ const Home = () => {
         </div>
       )}
 
-      {/* 그룹 삭제 모달 */}
       {showDeleteModal && (
         <div className="modal-overlay" onClick={handleCloseDeleteModal}>
           <div className="delete-modal-content" onClick={(e) => e.stopPropagation()}>
@@ -216,7 +251,17 @@ const Home = () => {
           <img src={moreButton} alt="더보기 버튼" className="more-button-private" />
         </>
       )}
+      {/* "달봉이네 가족" 문구 추가 */}
+      <p className="profile-description">서로 한 마음으로 응원하고 아끼는 달봉이네 가족입니다.</p>
+      
+      {/* "획득 배지" 문구 추가 */}
+      <p className="badge-text">획득 배지</p>
+
+      {/* 추가된 이미지 */}
+      <img src={groupPhoto} alt="그룹 사진" className="group-photo" />
     </div>
+
+    
   );
 };
 

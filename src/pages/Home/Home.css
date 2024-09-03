@@ -1,12 +1,15 @@
+
 /* 빈 배경을 위한 스타일 */
 .background-layer {
-  position: relative; /* absolute 대신 relative로 설정하여 기본 위치 지정 */
-  width: 1920px;
-  height: 2278px; /* 원래 이미지의 높이를 그대로 유지 */
-  background-color: #FAFAFA; /* 배경색을 흰색으로 설정 */
-  margin: 0 auto; /* 페이지 중앙에 배치 */
-  top: 0; /* 페이지 상단에 위치 */
+  position: relative;
+  width: 1920px; /* 고정된 너비 */
+  height: 100vh; /* 뷰포트의 높이에 맞추기 */
+  background-color: #ffffff;
+  margin: 0 auto; /* 가운데 정렬 */
+  top: 0;
+  overflow: hidden; /* 필요 시 사용 가능 */
 }
+
 
 /* logo.png */
 .logo {
@@ -72,19 +75,19 @@
 
 /* 공개.png (텍스트) */
 .public-text {
-  position: absolute;
-  width: 26px;
+  width: 28px;
   height: 18px;
-  left: calc(50% - 1560px / 2 + 96px); /* 공개비공개버튼의 left + 적당한 padding */
-  top: calc(250px + 273px + 100px + 120px + 110px + 4px); /* 공개비공개버튼의 top과 동일 공개.png와 마찬가지로 4px 내려버림*/
-  
+  position: absolute !important;
+  left: calc(50% - 1560px / 2 + 21px) !important;
+  top: calc(250px + 273px + 100px + 120px + 100px + 23px) !important;
+  z-index: 999 !important;
+
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: -0.03em;
-  color: #e40c0c;
 }
 
 /* 비공개.png (텍스트) */
@@ -433,15 +436,14 @@
   position: absolute;
   width: 187.88px;
   height: 52px;
-  left: 1552px; /* 계산함 */
-  top: 381px; /* 계산함 */
-  padding: 15px 40px; /* 버튼 안의 padding */
+  left: calc(50% - 1560px / 2 + 1350px); /* profile_all의 왼쪽 라인과 맞춤 */
+  top: calc(380px + 1px); /* 추억 목록 아래 100px 위치 */
+  padding: 15px 40px; /* 버튼 내부의 패딩 */
   background: none; /* 배경 없음 */
   border: none; /* 테두리 없음 */
   cursor: pointer;
-  transform: translate(-50%, -50%);
+  transform: translateX(-16%); /* X축으로 약간 왼쪽으로 이동하여 중앙 정렬 */
 }
-
 
 
 /* 공감 애니메이션 */
@@ -449,8 +451,8 @@
   position: absolute;
   width: 102.28px;
   height: 124px;
-  left: 1552px; /* 공감 보내기 버튼과 일치하는 위치로 조정 */
-  top: 224px; /* 공감 보내기 버튼의 상대적인 위치 */
+  left: calc(50% - 1560px / 2 + 1350px + 100px); /* 공감 보내기 버튼과 일치하는 위치로 조정 */
+  top: 254px; /* 공감 보내기 버튼의 상대적인 위치 */
   transform: translateX(-50%);
   opacity: 0;
   animation: fadeInOut 2s forwards;
@@ -476,8 +478,8 @@
   position: absolute;
   width: 106px;
   height: 18px;
-  top: 170px;
-  left: 1416px;
+  left: calc(50% - 1560px / 2 + 1350px + 95px - 150px); /* profile_all의 왼쪽 라인과 맞춤 */
+  top: calc(169px + 1px); /* 추억 목록 아래 100px 위치 */
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -662,8 +664,8 @@
 /* 그룹 삭제하기 버튼 */
 .delete-button {
   position: absolute;
-  top: 170px;
-  left: calc(1416px + 150px); /* 그룹 정보 수정 버튼의 오른쪽에 150px 위치 */
+  left: calc(50% - 1560px / 2 + 1350px + 95px); /* profile_all의 왼쪽 라인과 맞춤 */
+  top: calc(169px + 1px); /* 추억 목록 아래 100px 위치 */
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -753,3 +755,117 @@
   transform: translateX(-50%); /* 가운데 정렬 보정 */
 }
 
+/* 그룹사진.png 스타일 */
+.group-photo {
+  position: absolute;
+  width: 262px;
+  height: 273px;
+  top: 200px;
+  left: 180px;
+  border-radius: 6px 0px 0px 0px;
+}
+
+.family-text {
+  position: absolute;
+  width: 167px;
+  height: 38px;
+  top: 200px;
+  left: 502px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 37.56px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: black; /* 글씨 색상 */
+  white-space: nowrap;
+}
+
+.profile-description {
+  position: absolute;
+  width: 393px;
+  height: 23px;
+  top: 258px;
+  left: 502px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22.54px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  white-space: nowrap; /* 줄바꿈 없이 한 줄로 표시 */
+}
+
+.badge-text {
+  position: absolute;
+  width: 61px;
+  height: 20px;
+  top: 341px;
+  left: 502px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20.03px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.dday-description {
+  position: absolute;
+  width: 47px;
+  height: 20px;
+  top: 160px;
+  left: 502px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.03px;
+  letter-spacing: -0.03em;
+  text-align: left;
+}
+
+.status-public {
+  position: absolute;
+  width: 46px;
+  height: 20px;
+  top: 160px;
+  left: 564px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.03px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+.memory-count {
+  position: absolute;
+  width: 33px;
+  height: 23px;
+  top: 213px;
+  left: 709px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22.54px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+.group-sympathy {
+  position: absolute;
+  width: 108px;
+  height: 23px;
+  top: 213px;
+  left: 793px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22.54px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
