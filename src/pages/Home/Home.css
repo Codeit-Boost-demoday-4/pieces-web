@@ -1,1 +1,754 @@
+/* 빈 배경을 위한 스타일 */
+.background-layer {
+  position: relative; /* absolute 대신 relative로 설정하여 기본 위치 지정 */
+  width: 1920px;
+  height: 2278px; /* 원래 이미지의 높이를 그대로 유지 */
+  background-color: #FAFAFA; /* 배경색을 흰색으로 설정 */
+  margin: 0 auto; /* 페이지 중앙에 배치 */
+  top: 0; /* 페이지 상단에 위치 */
+}
 
+/* logo.png */
+.logo {
+  position: absolute;
+  width: 137px;
+  height: 48px;
+  left: 50%; /* 화면의 중앙에 배치 */
+  top: 26px; /* 상단에서 26px 아래에 위치 */
+  transform: translateX(-50%); /* 가로 중앙 정렬 */
+}
+
+
+/* profile_line */
+.profile-line {
+  position: absolute;
+  width: 1560px;
+  height: 0px; /* 원래 높이가 0이므로 선처럼 보임 */
+  left: 50%; /* 화면의 중앙에 배치 */
+  top: calc(250px + 273px + 100px); /* profile_all 이미지 아래에 100px 간격으로 배치 */
+  transform: translateX(-50%); /* 가로 중앙 정렬 */
+  opacity: 0.5;
+  border: 1px solid #DDDDDD; /* 회색 선 */
+}
+
+/* 추억 목록 */
+.memory-list {
+  position: absolute;
+  width: 91px;
+  height: 30px;
+  left: 50%; /* 화면의 중앙에 배치 */
+  top: calc(250px + 273px + 100px + 120px); /* profile_line 아래에 120px 간격으로 배치 */
+  transform: translateX(-50%); /* 가로 중앙 정렬 */
+  
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: -0.03em;
+  color: #282828;
+}
+
+/* 그룹상세페이지공개추억.png (추억 올리기.png) */
+.memory-upload {
+  position: absolute;
+  width: 200px;
+  height: 45px;
+  left: calc(50% + 1560px / 2 - 200px); /* profile_all의 오른쪽 라인과 맞춤 */
+  top: calc(250px + 273px + 100px + 120px); /* 추억 목록과 동일한 top 값 */
+}
+
+/* 그룹상세페이지공개추억.png (공개비공개버튼.png) */
+.toggle-button {
+  position: absolute;
+  width: 66px;
+  height: 45px;
+  left: calc(50% - 1560px / 2); /* profile_all의 왼쪽 라인과 맞춤 */
+  top: calc(250px + 273px + 100px + 120px + 100px); /* 추억 목록 아래 100px 위치 */
+  background: #282828;
+  border-radius: 22.5px;
+}
+
+/* 공개.png (텍스트) */
+.public-text {
+  position: absolute;
+  width: 26px;
+  height: 18px;
+  left: calc(50% - 1560px / 2 + 20px); /* 공개비공개버튼의 left + 적당한 padding */
+  top: calc(250px + 273px + 100px + 120px + 110px + 4px); /* 공개비공개버튼의 top + 적당한 padding 가운데 아닌 거 같아서 4px 내려버림 */
+  
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+}
+
+/* 비공개.png (텍스트) */
+.private-text {
+  position: absolute;
+  width: 38px;
+  height: 18px;
+  left: calc(50% - 1560px / 2 + 96px); /* 공개비공개버튼의 left + 적당한 padding */
+  top: calc(250px + 273px + 100px + 120px + 110px + 4px); /* 공개비공개버튼의 top과 동일 공개.png와 마찬가지로 4px 내려버림*/
+  
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+  color: #282828;
+}
+
+/* 태그 혹은 제목을 입력해 주세요.png (입력창) */
+.input-box {
+  position: absolute;
+  width: 1186px;
+  height: 45px;
+  left: calc(50% - 1186px / 2); /* 가로 방향 중앙에 위치 */
+  top: calc(250px + 273px + 100px + 120px + 100px + 1px); /* 비공개 텍스트의 top 값과 동일 */
+  background: #F4F4F4;
+  border-radius: 6px;
+}
+
+/* 그룹상세페이지공개추억.png (공감순.png) */
+.reaction-order {
+  position: absolute;
+  width: 160px;
+  height: 45px;
+  left: calc(50% + 1560px / 2 - 160px); /* profile_all의 오른쪽 라인에 맞춤 */
+  top: calc(250px + 273px + 100px + 120px + 100px + 1px); /* 태그 혹은 제목을 입력해 주세요.png와 동일한 top 값 */
+  background: #F4F4F4;
+  border-radius: 6px;
+}
+
+/* 공개글1.png (글 박스) */
+.public-post {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 370px;
+  left: calc(50% - 1560px / 2); /* profile_all의 왼쪽 라인과 맞춤 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px); /* 공개.png 밑에 위치시키기 위해 적절한 간격 설정 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 공개글2.png (글 박스) */
+.public-post-2 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 525px;
+  left: calc(50% - 1560px / 2); /* profile_all의 왼쪽 라인과 맞춤 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 370px + 10px); /* 공개글1 밑에 10px 간격으로 배치 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 공개글3.png (글 박스) */
+.public-post-3 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 525px;
+  left: calc(50% - 1560px / 2 + 375px + 20px); /* 공개글1 오른쪽에 30px 간격을 두고 배치 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px); /* 공개글1과 동일한 top 값 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 공개글4.png (글 박스) */
+.public-post-4 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 370px;
+  left: calc(50% - 1560px / 2 + 375px + 20px); /* 공개글3과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 525px + 10px); /* 공개글3 아래 10px 간격으로 배치 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 공개글5.png (글 박스) */
+.public-post-5 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 630px;
+  left: calc(50% - 1560px / 2 + 2 * (375px + 20px)); /* 공개글1 오른쪽으로 두 칸 떨어진 위치 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px); /* 공개글1과 동일한 top 값 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 공개글7.png (글 박스) */
+.public-post-7 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 370px;
+  left: calc(50% - 1560px / 2 + 3 * (375px + 20px)); /* 공개글1 오른쪽으로 세 칸 떨어진 위치 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px); /* 공개글1과 동일한 top 값 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 공개글6.png (글 박스) */
+.public-post-6 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 525px;
+  left: calc(50% - 1560px / 2 + 2 * (375px + 20px)); /* 공개글5와 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 630px + 10px); /* 공개글5 아래 10px 간격으로 배치 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 공개글8.png (글 박스) */
+.public-post-8 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 630px;
+  left: calc(50% - 1560px / 2 + 3 * (375px + 20px)); /* 공개글7과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 370px + 10px); /* 공개글7 아래 10px 간격으로 배치 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD
+}
+
+/* 더보기.png (버튼) */
+.more-button {
+  box-sizing: border-box;
+  position: absolute;
+  width: 1560px;
+  height: 60px;
+  left: 50%; /* 화면의 중앙에 배치 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 630px + 525px + 30px); /* 공개글6 아래 30px 위치 */
+  transform: translateX(-50%); /* 가로 중앙 정렬 */
+  background: #FAFAFA;
+  border: 1px solid #282828;
+  border-radius: 6px;
+}
+
+/* 비공개글 그룹 1 (공개글1과 공개글2에 해당) */
+.private-post-group1-1 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2); /* 공개글1과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px); /* 공개글1과 동일한 top 값 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group1-2 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2); /* 공개글1과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 142px + 10px); /* 첫 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group1-3 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2); /* 공개글1과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 2 * (142px + 10px)); /* 두 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group1-4 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2); /* 공개글1과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 3 * (142px + 10px)); /* 세 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 비공개글 그룹 2 (공개글3과 공개글4에 해당) */
+.private-post-group2-1 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 375px + 20px); /* 공개글3과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px); /* 공개글3과 동일한 top 값 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group2-2 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 375px + 20px); /* 공개글3과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 142px + 10px); /* 첫 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group2-3 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 375px + 20px); /* 공개글3과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 2 * (142px + 10px)); /* 두 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group2-4 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 375px + 20px); /* 공개글3과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 3 * (142px + 10px)); /* 세 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 비공개글 그룹 3 (공개글5와 공개글6에 해당) */
+.private-post-group3-1 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 2 * (375px + 20px)); /* 공개글5와 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px); /* 공개글5와 동일한 top 값 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group3-2 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 2 * (375px + 20px)); /* 공개글5와 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 142px + 10px); /* 첫 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group3-3 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 2 * (375px + 20px)); /* 공개글5와 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 2 * (142px + 10px)); /* 두 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 비공개글 그룹 4 (공개글7과 공개글8에 해당) */
+.private-post-group4-1 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 3 * (375px + 20px)); /* 공개글7과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px); /* 공개글7과 동일한 top 값 */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group4-2 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 3 * (375px + 20px)); /* 공개글7과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 142px + 10px); /* 첫 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+.private-post-group4-3 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 375px;
+  height: 142px;
+  left: calc(50% - 1560px / 2 + 3 * (375px + 20px)); /* 공개글7과 동일한 left 값 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 2 * (142px + 10px)); /* 두 번째 비공개글 아래 10px */
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 12px;
+}
+
+/* 더보기.png (비공개글 그룹1의 마지막 글 아래에 배치) */
+.more-button-private {
+  box-sizing: border-box;
+  position: absolute;
+  width: 1560px;
+  height: 60px;
+  left: calc(50% - 1560px / 2); /* 중앙에 배치 */
+  top: calc(250px + 273px + 100px + 120px + 110px + 50px + 4 * (142px + 10px) + 10px); /* 비공개글 그룹1의 마지막 글 아래 30px 간격으로 배치 */
+  background: #FAFAFA;
+  border: 1px solid #282828;
+  border-radius: 6px;
+}
+
+/* 공감 보내기 버튼 */
+.sympathy-button {
+  position: absolute;
+  width: 187.88px;
+  height: 52px;
+  left: 1552px; /* 계산함 */
+  top: 381px; /* 계산함 */
+  padding: 15px 40px; /* 버튼 안의 padding */
+  background: none; /* 배경 없음 */
+  border: none; /* 테두리 없음 */
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+
+
+/* 공감 애니메이션 */
+.sympathy-animation {
+  position: absolute;
+  width: 102.28px;
+  height: 124px;
+  left: 1552px; /* 공감 보내기 버튼과 일치하는 위치로 조정 */
+  top: 224px; /* 공감 보내기 버튼의 상대적인 위치 */
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: fadeInOut 2s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px); /* 살짝 아래에서 시작 */
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* 중앙으로 이동 */
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px); /* 살짝 위로 이동하면서 사라짐 */
+  }
+}
+
+/* 그룹 정보 수정 버튼 스타일 */
+.text-button {
+  position: absolute;
+  width: 106px;
+  height: 18px;
+  top: 170px;
+  left: 1416px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.53px;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: #282828; /* 글씨 색상 설정 */
+}
+
+/* 모달 오버레이 (배경 어둡게) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* 어두운 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달 내용 */
+.modal-content {
+  width: 480px;
+  height: 879px;
+  background-color: #FAFAFA;
+  border-radius: 6px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-title {
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30.05px;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.modal-label {
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20.03px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.modal-input {
+  width: 400px;
+  height: 45px;
+  padding: 10px;
+  background-color: #FAFAFA;
+  border: 1px solid #282828;
+  border-radius: 6px;
+}
+
+/* 대표 이미지 업로드 섹션 */
+.image-upload {
+  display: flex;
+  align-items: center; /* 수직으로 가운데 정렬 */
+  gap: 10px; /* 대표 이미지 첨부 창과 파일 선택 버튼 간의 간격 */
+  position: absolute;
+  top: 939px;
+  left: 760px;
+}
+
+/* 전체 모달 창을 기준으로 하는 대표 이미지 첨부 입력창 */
+.image-input {
+  position: absolute;
+  width: 290px;
+  height: 45px;
+  top: calc(939px / 879 * 100%); /* 전체 모달 창 높이의 비율로 위치 설정 */
+  left: calc(760px / 480 * 100%); /* 전체 모달 창 너비의 비율로 위치 설정 */
+  background-color: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* 파일 선택 버튼 */
+.file-select-button {
+  position: absolute;
+  width: 100px;
+  height: 45px;
+  top: calc(939px / 879 * 100%); /* 전체 모달 창 높이의 비율로 위치 설정 */
+  left: calc(1060px / 480 * 100%); /* 전체 모달 창 너비의 비율로 위치 설정 */
+  background-color: #282828;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+.modal-textarea {
+  width: 400px;
+  height: 120px;
+  padding: 10px;
+  background-color: #FAFAFA;
+  border: 1px solid #282828;
+  border-radius: 6px;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.switch {
+  width: 48px;
+  height: 24px;
+  background-color: #282828;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.switch.on {
+  background-color: #a7a6a6;
+}
+
+.switch.off {
+  background-color: #282828;
+}
+
+.switch-circle {
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.3s;
+}
+
+.switch.on .switch-circle {
+  left: calc(100% - 22px);
+}
+
+.switch-label {
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.53px;
+  letter-spacing: -0.03em;
+}
+
+.edit-submit-button {
+  width: 400px;
+  height: 50px;
+  background-color: #282828;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.edit-success-message {
+  color: green;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+/* 그룹 삭제하기 버튼 */
+.delete-button {
+  position: absolute;
+  top: 170px;
+  left: calc(1416px + 150px); /* 그룹 정보 수정 버튼의 오른쪽에 150px 위치 */
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #A0A0A0; /* 회색 */
+  cursor: pointer;
+}
+
+/* 모달 오버레이 (배경 어둡게) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* 어두운 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 그룹 삭제 모달 내용 */
+.delete-modal-content {
+  width: 480px;
+  height: 335px;
+  background-color: #FAFAFA;
+  border-radius: 6px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 그룹 삭제 제목 */
+.delete-modal-title {
+  width: 100%; /* 너비를 모달의 전체 너비로 설정 */
+  height: 30px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #282828;
+  text-align: center;
+  margin: 0 auto; /* 텍스트를 중앙에 배치 */
+  line-height: 30px; /* 텍스트 높이를 맞춰 줄바꿈 방지 */
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+/* 삭제 권한 인증 텍스트 */
+.delete-modal-label {
+  position: relative;
+  top: 40px; /* 비밀번호 입력창 바로 위에 위치 */
+  left: 9%;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #282828;
+  margin-bottom: 5px; /* 비밀번호 입력칸과의 간격을 줄여서 바로 위에 위치 */
+}
+
+/* 비밀번호 입력창 */
+.delete-modal-input {
+  width: 400px;
+  height: 45px;
+  background-color: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  top: 30px; /* 아래로 30px 이동 */
+  left: 50%; /* 부모 요소 기준으로 가운데 정렬 */
+  transform: translateX(-50%); /* 가운데 정렬 보정 */
+}
+
+/* 삭제하기 버튼 */
+.delete-submit-button {
+  width: 400px;
+  height: 50px;
+  background-color: #282828;
+  color: #FFFFFF;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  top: 50px; /* 아래로 50px 이동 */
+  left: 50%; /* 부모 요소 기준으로 가운데 정렬 */
+  transform: translateX(-50%); /* 가운데 정렬 보정 */
+}
