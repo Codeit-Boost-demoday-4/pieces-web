@@ -1,217 +1,130 @@
-import styled from 'styled-components';
+/* 전체 컨테이너 */
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+}
 
-export const LogoContainer = styled.div`
-  position: fixed;
+/* 로고 */
+.logo {
+  position: absolute;
   width: 137px;
   height: 48px;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  top: calc(100vh * (7532 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  left: calc(100vw * (5030 / 1920)); /* 주어진 left 위치 비율로 계산 */
   cursor: pointer;
+}
 
-  img {
-    width: 100%;
-    height: auto;
+/* 공감 보내기 버튼 */
+.hug-button {
+  position: absolute;
+  width: 188px;
+  height: 52px;
+  top: calc(100vh * (7887 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  left: calc(100vw * (5672 / 1920)); /* 주어진 left 위치 비율로 계산 */
+  padding: 15px 40px;
+  gap: 10px;
+  border-radius: 6px; /* 버튼의 모서리를 둥글게 만듦 */
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* 꽃 애니메이션 */
+.flower {
+  position: absolute;
+  width: 102.28px;
+  height: 124px;
+  top: calc(100vh * (7760 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  left: calc(100vw * (5715 / 1920)); /* 주어진 left 위치 비율로 계산 */
+  animation: fadeOut 1s forwards; /* 1초 후 사라짐 */
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
   }
-`;
-
-export const ProfileContainer = styled.div`
-  position: fixed;
-  width: 1248px; /* Profile All 너비 */
-  height: 218.4px;
-  top: 108px;
-  left: 50%;
-  transform: translateX(-50%);
- 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  100% {
+    opacity: 0;
   }
-`;
+}
 
-export const ProfileLineContainer = styled.div`
-  position: fixed;
-  width: 1248px;
-  height: auto;
-  top: calc(108px + 218.4px + 48px);
-  left: 50%;
-  transform: translateX(-50%);
- 
-  img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-`;
+/* 프로필 선 */
+.profile-line {
+  position: absolute;
+  width: 1560px;
+  height: 0;
+  left: calc(50% - 780px); /* 화면 가운데 정렬 */
+  top: calc(100vh * (8059 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  opacity: 0.5;
+  border: 1px solid #dddddd;
+}
 
-export const MemoryListContainer = styled.div`
-  position: fixed;
-  width: auto;
-  height: auto;
-  top: calc(108px + 218.4px + 108px);
-  left: 50%;
-  transform: translateX(-50%);
+/* 추억 목록 */
+.memory-list {
+  position: absolute;
+  width: 91px;
+  height: 30px;
+  left: calc(50% - 45.5px); /* 화면 가운데 정렬 */
+  top: calc(100vh * (8186 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: -0.03em;
+  color: #282828;
+}
 
-  img {
-    display: block;
-    margin: 0 auto;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-export const UploadButtonContainer = styled.div`
-  position: fixed;
+/* 추억 올리기 버튼 */
+.upload-memory {
+  position: absolute;
   width: 200px;
-  height: auto;
-  top: calc(108px + 218.4px + 108px);
-  left: calc(50% + 624px - 200px);
+  height: 45px;
+  left: calc(100vw * (5660 / 1920)); /* 주어진 left 위치 비율로 계산 */
+  top: calc(100vh * (8179 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  background-color: #000000; /* 검은색 배경 */
+  color: #ffffff; /* 흰색 글씨 */
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17.53px;
+  letter-spacing: -0.03em;
+  text-align: center;
+  border: none;
+  border-radius: 6px; /* 버튼의 모서리를 둥글게 만듦 */
   cursor: pointer;
+}
 
-  img {
-    width: 100%;
-    height: auto;
-  }
-`;
+/* 태그 혹은 제목을 입력해 주세요 입력창 */
+.search-bar {
+  position: absolute;
+  width: 1186px;
+  height: 45px;
+  left: calc(100vw * (4474 / 1920)); /* 주어진 left 위치 비율로 계산 */
+  top: calc(100vh * (8284 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  display: flex;
+  align-items: center;
+  border: 1px solid #dddddd;
+  padding-left: 24px; /* 돋보기 아이콘 크기만큼 패딩 추가 */
+}
 
-export const SearchBarContainer = styled.div`
-  position: fixed;
-  width: auto;
-  height: auto;
-  top: calc(108px + 218.4px + 156px + 40px);
-  left: 50%;
-  transform: translateX(-50%);
+.search-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../assets/search-icon.png'); /* 돋보기 이미지 경로 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}
 
-  img {
-    display: block;
-    margin: 0 auto;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-// 공개글1 컨테이너
-export const PublicPostContainer = styled.div`
-  position: fixed;
-  width: 370px; /* 공개글1의 너비 */
-  height: auto;
-  top: calc(108px + 218.4px + 156px + 40px + 50px + 20px); /* 70px 아래 */
-  left: calc(50% - 624px); /* profile_all 왼쪽 정렬 */
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-// 공개글2 컨테이너
-export const PublicPost2Container = styled.div`
-  position: fixed;
-  width: 370px;
-  height: auto;
-  top: calc(108px + 218.4px + 156px + 40px + 50px + 20px + 20px + 370px); /* 공개글1 아래 20px 간격 (370px은 공개글1의 높이 가정) */
-  left: calc(50% - 624px); /* profile_all 왼쪽 정렬 */
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-// 공개글3 컨테이너 (중앙 정렬)
-export const PublicPost3Container = styled.div`
-  position: fixed;
-  width: 370px; /* 공개글3의 너비 */
-  height: auto;
-  top: calc(108px + 218.4px + 156px + 40px + 50px + 20px); /* 공개글1과 동일한 높이 */
-  left: 50%; /* 왼쪽 라인을 화면의 중앙으로 */
-  transform: translateX(-50%); /* 너비의 50%를 왼쪽으로 이동시켜 중앙 정렬 */
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-// 공개글4 컨테이너 (공개글3 아래 20px 간격)
-export const PublicPost4Container = styled.div`
-  position: fixed;
-  width: 370px; /* 공개글4의 너비 */
-  height: auto;
-  top: calc(108px + 218.4px + 156px + 40px + 50px + 20px + 525px + 20px); /* 공개글3 아래 20px 간격 */
-  left: 50%; /* 중앙 정렬 */
-  transform: translateX(-50%);
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-// 공개글5 컨테이너
-export const PublicPost5Container = styled.div`
-  position: fixed;
-  width: 370px; /* 공개글5의 너비 */
-  height: auto;
-  top: calc(108px + 218.4px + 156px + 40px + 50px + 20px); /* 공개글1과 동일한 높이 */
-  left: calc(50% + 624px - 370px); /* profile_all의 오른쪽 라인에 맞춤 */
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-// 공개글6 컨테이너 (공개글5 아래 20px 간격)
-export const PublicPost6Container = styled.div`
-  position: fixed;
-  width: 370px; /* 공개글6의 너비 */
-  height: auto;
-  top: calc(108px + 218.4px + 156px + 40px + 50px + 20px + 525px + 20px); /* 공개글5 아래 20px 간격 */
-  left: calc(50% + 624px - 370px); /* profile_all의 오른쪽 라인에 맞춤 */
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
-// 더보기 버튼 컨테이너 (공개글6 아래 30px 간격)
-export const MoreButtonContainer = styled.div`
-  position: fixed;
-  width: 1248px; /* profile_all과 동일한 너비 */
-  height: auto; /* 높이는 비율에 맞게 자동 조정 */
-  top: calc(108px + 218.4px + 156px + 40px + 50px + 20px + 525px + 20px + 525px + 30px); /* 공개글6 아래 30px 간격 */
-  left: 50%; /* 중앙 정렬 */
-  transform: translateX(-50%);
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-`;
-
+.search-input {
+  width: calc(100% - 34px); /* 아이콘 공간 제외한 입력창 너비 */
+  border: none;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-weight: 400;
+  font-size: 14px;

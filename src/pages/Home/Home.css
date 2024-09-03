@@ -75,8 +75,8 @@
   position: absolute;
   width: 26px;
   height: 18px;
-  left: calc(50% - 1560px / 2 + 20px); /* 공개비공개버튼의 left + 적당한 padding */
-  top: calc(250px + 273px + 100px + 120px + 110px + 4px); /* 공개비공개버튼의 top + 적당한 padding 가운데 아닌 거 같아서 4px 내려버림 */
+  left: calc(50% - 1560px / 2 + 96px); /* 공개비공개버튼의 left + 적당한 padding */
+  top: calc(250px + 273px + 100px + 120px + 110px + 4px); /* 공개비공개버튼의 top과 동일 공개.png와 마찬가지로 4px 내려버림*/
   
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
@@ -84,7 +84,7 @@
   font-size: 14px;
   line-height: 18px;
   letter-spacing: -0.03em;
-  color: #FFFFFF;
+  color: #e40c0c;
 }
 
 /* 비공개.png (텍스트) */
@@ -716,7 +716,7 @@
 .delete-modal-label {
   position: relative;
   top: 40px; /* 비밀번호 입력창 바로 위에 위치 */
-  left: 9%;
+  left: 10% + 10px;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -752,3 +752,4 @@
   left: 50%; /* 부모 요소 기준으로 가운데 정렬 */
   transform: translateX(-50%); /* 가운데 정렬 보정 */
 }
+

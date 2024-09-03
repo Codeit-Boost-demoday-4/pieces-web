@@ -1,105 +1,58 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png';
-import profileAll from '../../assets/profile_all.png';
-import profileLine from '../../assets/profile_line.png';
-import memoryList from '../../assets/추억목록.png';
-import uploadButton from '../../assets/추억올리기.png';
-import searchBar from '../../assets/태그 혹은 제목을 입력해 주세요.png';
-import 공개글1 from '../../assets/공개글1.png';
-import 공개글2 from '../../assets/공개글2.png';
-import 공개글3 from '../../assets/공개글3.png';
-import 공개글4 from '../../assets/공개글4.png';
-import 공개글5 from '../../assets/공개글5.png';
-import 공개글6 from '../../assets/공개글6.png';
-import 더보기 from '../../assets/더보기.png'; // 더보기.png 추가
-
-import {
-  LogoContainer,
-  ProfileContainer,
-  ProfileLineContainer,
-  MemoryListContainer,
-  UploadButtonContainer,
-  SearchBarContainer,
-  PublicPostContainer,
-  PublicPost2Container,
-  PublicPost3Container,
-  PublicPost4Container,
-  PublicPost5Container,
-  PublicPost6Container,
-  MoreButtonContainer, // MoreButtonContainer 추가
-} from './styles';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import logo from "../../assets/group/로고.png";
+import 공감보내기 from "../../assets/group/공감보내기.png";
+import 꽃 from "../../assets/group/꽃.png";
 
 const Group = () => {
   const navigate = useNavigate();
+  const [showFlower, setShowFlower] = useState(false);
+
+  const handleHugClick = () => {
+    setShowFlower(true);
+    setTimeout(() => {
+      setShowFlower(false);
+    }, 1000); // 1초 후 꽃을 사라지게 함
+  };
 
   return (
-    <>
-      {/* Clickable logo */}
-      <LogoContainer onClick={() => navigate('/group')}>
+    <div className="container">
+      {/* 로고 */}
+      <div className="logo" onClick={() => navigate("/group")}>
         <img src={logo} alt="Logo" />
-      </LogoContainer>
-     
-      {/* Profile All image */}
-      <ProfileContainer>
-        <img src={profileAll} alt="Profile All" />
-      </ProfileContainer>
+      </div>
 
-      {/* Profile Line image */}
-      <ProfileLineContainer>
-        <img src={profileLine} alt="Profile Line" />
-      </ProfileLineContainer>
+      {/* 공감 보내기 버튼 */}
+      <div className="hug-button" onClick={handleHugClick}>
+        <img src={공감보내기} alt="공감 보내기" />
+      </div>
 
-      {/* Memory List image */}
-      <MemoryListContainer>
-        <img src={memoryList} alt="Memory List" />
-      </MemoryListContainer>
+      {/* 꽃 애니메이션 */}
+      {showFlower && (
+        <div className="flower">
+          <img src={꽃} alt="Flower" />
+        </div>
+      )}
 
-      {/* Upload Button */}
-      <UploadButtonContainer>
-        <img src={uploadButton} alt="Upload Button" />
-      </UploadButtonContainer>
+      {/* 프로필 선 */}
+      <div className="profile-line"></div>
 
-      {/* Search Bar */}
-      <SearchBarContainer>
-        <img src={searchBar} alt="Search Bar" />
-      </SearchBarContainer>
+      {/* 추억 목록 */}
+      <div className="memory-list">추억 목록</div>
 
-      {/* Public Post 1 */}
-      <PublicPostContainer>
-        <img src={공개글1} alt="Public Post 1" />
-      </PublicPostContainer>
+      {/* 추억 올리기 버튼 */}
+      <button className="upload-memory">추억 올리기</button>
 
-      {/* Public Post 2 */}
-      <PublicPost2Container>
-        <img src={공개글2} alt="Public Post 2" />
-      </PublicPost2Container>
-
-      {/* Public Post 3 */}
-      <PublicPost3Container>
-        <img src={공개글3} alt="Public Post 3" />
-      </PublicPost3Container>
-
-      {/* Public Post 4 */}
-      <PublicPost4Container>
-        <img src={공개글4} alt="Public Post 4" />
-      </PublicPost4Container>
-
-      {/* Public Post 5 */}
-      <PublicPost5Container>
-        <img src={공개글5} alt="Public Post 5" />
-      </PublicPost5Container>
-
-      {/* Public Post 6 */}
-      <PublicPost6Container>
-        <img src={공개글6} alt="Public Post 6" />
-      </PublicPost6Container>
-
-      {/* More Button */}
-      <MoreButtonContainer>
-        <img src={더보기} alt="More Button" />
-      </MoreButtonContainer>
-    </>
+      {/* 태그 혹은 제목을 입력해 주세요 입력창 */}
+      <div className="search-bar">
+        <div className="search-icon"></div>
+        <input
+          type="text"
+          placeholder="태그 혹은 제목을 입력해 주세요"
+          className="search-input"
+        />
+      </div>
+    </div>
   );
 };
 
