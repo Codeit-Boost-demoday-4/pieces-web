@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Group from "./pages/Group/group"; // 경로 수정
-import Memories from "./pages/Memories/Memories"; // 경로 수정
+import Memories from "./pages/Memories"; // 경로 수정
 
 class App extends React.Component {
   render() {
