@@ -1,8 +1,8 @@
 /* 빈 배경을 위한 스타일 */
 .background-layer {
   position: relative; /* absolute 대신 relative로 설정하여 기본 위치 지정 */
-  width: 1920px;
-  height: 2278px; /* 원래 이미지의 높이를 그대로 유지 */
+  width: 100vw;
+  height: 100vh; /* 원래 이미지의 높이를 그대로 유지 */
   background-color: #FAFAFA; /* 배경색을 흰색으로 설정 */
   margin: 0 auto; /* 페이지 중앙에 배치 */
   top: 0; /* 페이지 상단에 위치 */
