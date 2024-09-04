@@ -114,11 +114,15 @@ const Upload = () => {
         isPublic,
       };
 
-      const response = await axios.post(`/groups/${groupId}/posts`, postData);
+      const response = await axios.post(
+        `https://pieces-server.onrender.com/api/groups/${groupId}/posts`,
+        postData
+      );
 
       // 서버에서 성공적인 응답을 받은 경우
       if (response.status === 200 || response.status === 201) {
         alert("추억이 성공적으로 업로드되었습니다!");
+        nav(`group/${groupId}`);
       } else {
         throw new Error(response.data.message || "Failed");
       }
