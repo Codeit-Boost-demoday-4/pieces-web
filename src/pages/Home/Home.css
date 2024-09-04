@@ -816,7 +816,7 @@
   position: absolute;
   width: 47px;
   height: 20px;
-  top: 160px;
+  top: 200px;
   left: 502px;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 16px;
@@ -830,7 +830,7 @@
   position: absolute;
   width: 46px;
   height: 20px;
-  top: 160px;
+  top: 200px;
   left: 564px;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 16px;
@@ -845,7 +845,7 @@
   position: absolute;
   width: 33px;
   height: 23px;
-  top: 213px;
+  top: 236px;
   left: 709px;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 18px;
@@ -860,7 +860,7 @@
   position: absolute;
   width: 108px;
   height: 23px;
-  top: 213px;
+  top: 236px;
   left: 793px;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   font-size: 18px;
@@ -885,4 +885,40 @@
   text-align: left;
   opacity: 1; /* 초기에는 보이도록 설정 */
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+.badge-image-1 {
+  position: absolute;
+  width: 215px; /* Hug 크기 */
+  height: 52px; /* Hug 크기 */
+  top: 381px;
+  left: 472px;
+  padding: 16px 30px;
+  gap: 10px;
+  border-radius: 50px 0px 0px 0px;
+  opacity: 1; /* 필요에 따라 수정 가능 */
+}
+
+.badge-image-2 {
+  position: absolute;
+  width: 250px; /* Hug 크기 */
+  height: 52px; /* Hug 크기 */
+  top: 381px;
+  left: calc(472px + 225px);
+  padding: 16px 30px;
+  gap: 10px;
+  border-radius: 50px 0px 0px 0px;
+  opacity: 1; /* 필요에 따라 수정 가능 */
+}
+
+.badge-image-3 {
+  position: absolute;
+  width: 250px; /* Hug 크기 */
+  height: 52px; /* Hug 크기 */
+  top: 381px;
+  left: calc(472px + 225px + 225px + 35px);
+  padding: 16px 30px;
+  gap: 10px;
+  border-radius: 50px 0px 0px 0px;
+  opacity: 1; /* 필요에 따라 수정 가능 */
 }

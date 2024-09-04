@@ -17,6 +17,9 @@ import moreButton from "../../assets/더보기.png";
 import privatePost from "../../assets/비공개글.png";
 import sympathyButton from "../../assets/공감보내기.png";
 import sympathyAnimation from "../../assets/공감보내기클릭시.png";
+import badge1 from "../../assets/badge1.png";
+import badge2 from "../../assets/badge2.png";
+import badge3 from "../../assets/badge3.png";
 
 // 새로운 이미지 import
 import groupPhoto from "../../assets/그룹사진.png";
@@ -128,6 +131,22 @@ const Home = () => {
         그룹 정보 수정
       </div>
 
+      <div className="dday-description">
+        D+265
+      </div>
+
+      <div className="status-public">
+        |&nbsp;&nbsp;&nbsp;공개
+      </div>
+      
+      <div className="memory-count">
+        추억 8
+      </div>
+      
+      <div className="group-sympathy">
+        |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그룹 공감 23
+      </div>
+
       {/* 그룹 삭제하기 버튼 */}
       <div
         className="delete-button"
@@ -148,6 +167,10 @@ const Home = () => {
         className="sympathy-button"
         onClick={handleSympathyClick}
       />
+
+      <img src={badge1} alt="Badge 1" className="badge-image-1" />
+      <img src={badge2} alt="Badge 2" className="badge-image-2" />
+      <img src={badge3} alt="Badge 2" className="badge-image-3" />
 
       {/* 공감 애니메이션 */}
       {showSympathy && (
