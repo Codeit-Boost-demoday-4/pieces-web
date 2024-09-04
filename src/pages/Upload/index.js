@@ -20,15 +20,15 @@ import {
   ToggleSwitch,
   SwitchHandle,
 } from "./styles.js";
-import closeButton from "./assets/close-button.svg";
+import closeButton from "../../assets/close-button.svg";
 import deleteTagImage from "../../assets/memories/태그삭제.png"; // 태그 삭제 버튼 이미지 불러오기
 import AuthModal from "./AuthModal/index.js";
 import { LogoTopBar } from "../../components/LogoTopBar.js";
 import axios from "axios";
 
 const Upload = () => {
-  //const groupId = useParams(); // URL에서 groupId를 가져옴
-  const groupId = 1;
+  const groupId = useParams(); // URL에서 groupId를 가져옴
+  //const groupId = 1;
   const nav = useNavigate();
 
   const [isPublic, setIsPublic] = useState(true);
@@ -42,7 +42,7 @@ const Upload = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [postPassword, setPostPassword] = useState("");
-  const [groupPassword, setGroupPassword] = useState("");
+  //const [groupPassword, setGroupPassword] = useState("");
   const [imageUrl, setImageUrl] = useState([]);
   const [location, setLocation] = useState("");
   const [moment, setMoment] = useState("");
@@ -73,11 +73,13 @@ const Upload = () => {
     }
   };
 
+  /*
   const triggerFileSelect = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
+  */
 
   const removeTag = (index) => {
     setTags(tags.filter((_, i) => i !== index));

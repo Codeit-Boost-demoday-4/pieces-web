@@ -1,0 +1,50 @@
+/* 전체 컨테이너 */
+.container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+  background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+}
+
+/* 로고 */
+.logo {
+  position: absolute;
+  width: 137px;
+  height: 48px;
+  top: calc(100vh * (7532 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  left: calc(100vw * (5030 / 1920)); /* 주어진 left 위치 비율로 계산 */
+  cursor: pointer;
+}
+
+/* 태그 혹은 제목을 입력해 주세요 입력창 */
+.search-bar {
+  position: absolute;
+  width: 1186px;
+  height: 45px;
+  left: calc(100vw * (4474 / 1920)); /* 주어진 left 위치 비율로 계산 */
+  top: calc(100vh * (8284 / 2278)); /* 주어진 top 위치 비율로 계산 */
+  display: flex;
+  align-items: center;
+  border: 1px solid #dddddd;
+  padding-left: 24px; /* 돋보기 아이콘 크기만큼 패딩 추가 */
+}
+
+.search-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../assets/search-icon.png'); /* 돋보기 이미지 경로 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}
+
+.search-input {
+  width: calc(100% - 34px); /* 아이콘 공간 제외한 입력창 너비 */
+  border: none;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
