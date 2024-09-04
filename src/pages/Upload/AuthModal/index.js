@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import closeButton from "../assets/close-button.svg";
+import closeButton from "../../../assets/close-button.svg";
 import { ModalWrapper, Modal, CloseButton, Button } from "./styles";
 
 const AuthModal = ({ onSubmit, onClose }) => {
