@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import './Home.css';
 import logo from "../../assets/logo.png";
 import profileLine from "../../assets/profile_line.png";
-import memoryList from "../../assets/추억목록.png";
 import memoryUpload from "../../assets/추억올리기.png";
 import toggleButton from "../../assets/공개비공개버튼.png";
-import publicText from "../../assets/공개.png";
-import privateText from "../../assets/비공개.png";
 import publicPost from "../../assets/공개글1.png";
 import publicPost2 from "../../assets/공개글2.png";
 import publicPost3 from "../../assets/공개글3.png";
@@ -96,7 +93,8 @@ const Home = () => {
       <div className="background-layer"></div>
       <img src={logo} alt="로고" className="logo" />
       <img src={profileLine} alt="프로필 선" className="profile-line" />
-      <img src={memoryList} alt="추억 목록" className="memory-list" />
+      <span className="memory-list">추억 목록</span>
+
       <Link to="/memories">
         <img src={memoryUpload} alt="추억 올리기" className="memory-upload" />
       </Link>
@@ -105,20 +103,21 @@ const Home = () => {
         alt="공개 비공개 버튼"
         className="toggle-button"
       />
-      <img
-        src={publicText}
-        alt="공개 텍스트"
+      <span
         className="public-text"
         onClick={handleShowPublic}
         style={{ cursor: "pointer" }}
-      />
-      <img
-        src={privateText}
-        alt="비공개 텍스트"
+      >
+        공개
+      </span>
+
+      <span
         className="private-text"
         onClick={handleShowPrivate}
         style={{ cursor: "pointer" }}
-      />
+      >
+        비공개
+      </span>
 
       {/* 그룹 정보 수정 버튼 */}
       <div
@@ -137,7 +136,11 @@ const Home = () => {
       >
         그룹 삭제하기
       </div>
-
+      
+      <div className="group-name">
+        달봉이네 가족
+      </div>
+     
       {/* 공감 보내기 버튼 */}
       <img
         src={sympathyButton}

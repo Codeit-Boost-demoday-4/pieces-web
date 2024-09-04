@@ -33,7 +33,7 @@
   border: 1px solid #DDDDDD; /* 회색 선 */
 }
 
-/* 추억 목록 */
+/* 추억 목록 (텍스트로 표시) */
 .memory-list {
   position: absolute;
   width: 91px;
@@ -41,16 +41,17 @@
   left: 50%; /* 화면의 중앙에 배치 */
   top: calc(250px + 273px + 100px + 120px); /* profile_line 아래에 120px 간격으로 배치 */
   transform: translateX(-50%); /* 가로 중앙 정렬 */
-  
-  font-family: 'Spoqa Han Sans Neo';
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  font-family: 'Spoqa Han Sans Neo'; /* 글꼴 */
   font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 30px;
+  font-weight: 700; /* 글꼴 두께 */
+  font-size: 24px;  /* 글꼴 크기 */
+  line-height: 30px; /* 줄 간격 */
+  letter-spacing: -0.03em; /* 자간 */
   text-align: center;
-  letter-spacing: -0.03em;
-  color: #282828;
+  color: #282828; /* 텍스트 색상 */
 }
+
 
 /* 그룹상세페이지공개추억.png (추억 올리기.png) */
 .memory-upload {
@@ -72,39 +73,40 @@
   border-radius: 22.5px;
 }
 
-/* 공개.png (텍스트) */
+/* 공개 (텍스트로 대체) */
 .public-text {
-  width: 28px;
-  height: 18px;
   position: absolute !important;
   left: calc(50% - 1560px / 2 + 21px) !important;
-  top: calc(250px + 273px + 100px + 120px + 100px + 23px) !important;
+  top: calc(250px + 273px + 100px + 120px + 100px + 13px) !important;
   z-index: 999 !important;
 
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans Neo';  /* 글꼴 */
   font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.03em;
+  font-weight: 700;  /* 굵기 */
+  font-size: 14px;  /* 크기 */
+  line-height: 18px;  /* 줄 간격 */
+  letter-spacing: -0.03em;  /* 자간 */
+  color: #ffffff;  /* 텍스트 색상 */
+  text-align: left;  /* 왼쪽 정렬 */
 }
 
-/* 비공개.png (텍스트) */
+
+/* 비공개 (텍스트로 대체) */
 .private-text {
   position: absolute;
-  width: 38px;
-  height: 18px;
   left: calc(50% - 1560px / 2 + 96px); /* 공개비공개버튼의 left + 적당한 padding */
-  top: calc(250px + 273px + 100px + 120px + 110px + 4px); /* 공개비공개버튼의 top과 동일 공개.png와 마찬가지로 4px 내려버림*/
+  top: calc(250px + 273px + 100px + 120px + 110px + 4px); /* 공개비공개버튼의 top과 동일하게 4px 내려줌 */
   
-  font-family: 'Spoqa Han Sans Neo';
+  font-family: 'Spoqa Han Sans Neo';  /* 글꼴 */
   font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.03em;
-  color: #282828;
+  font-weight: 1000;  /* 굵기 */
+  font-size: 14px;  /* 크기 */
+  line-height: 18px;  /* 줄 간격 */
+  letter-spacing: -0.03em;  /* 자간 */
+  color: #282828;  /* 텍스트 색상 */
+  text-align: left;  /* 왼쪽 정렬 */
 }
+
 
 /* 태그 혹은 제목을 입력해 주세요.png (입력창) */
 .input-box {
@@ -866,5 +868,21 @@
   line-height: 22.54px;
   letter-spacing: -0.03em;
   text-align: left;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+.group-name {
+  position: absolute;
+  width: 167px;
+  height: 38px;
+  top: 225px;
+  left: 502px;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 37.56px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  opacity: 1; /* 초기에는 보이도록 설정 */
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 }
