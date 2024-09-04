@@ -13,7 +13,7 @@ const LogoContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  z-index: 5;
+  z-index: 1;
 `;
 
 export const LogoTopBar = () => {
