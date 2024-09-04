@@ -23,7 +23,7 @@ import {
 import closeButton from "../../assets/close-button.svg";
 import deleteTagImage from "../../assets/memories/태그삭제.png"; // 태그 삭제 버튼 이미지 불러오기
 import AuthModal from "./AuthModal/index.js";
-import { LogoTopBar } from "../../components/LogoTopBar.js";
+import { LogoTopBar } from "../../components/LogoTopBar/index.js";
 import axios from "axios";
 
 const Upload = () => {

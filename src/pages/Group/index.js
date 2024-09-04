@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./styles.css";
-import publicPost from "../../assets/group/공개글1.png";
-import publicPost2 from "../../assets/group/공개글2.png";
-import publicPost3 from "../../assets/group/공개글3.png";
-import publicPost4 from "../../assets/group/공개글4.png";
-import publicPost5 from "../../assets/group/공개글5.png";
-import moreButton from "../../assets/group/더보기.png";
-import privatePost from "../../assets/group/비공개글.png";
 import sendLike from "../../assets/group/sendLike.svg";
 import likeAnimation from "../../assets/group/likeAnimation.svg";
 import searchIcon from "../../assets/group/searchIcon.svg";
-
-// 새로운 이미지 import
 import groupPhoto from "../../assets/group/그룹사진.png";
 
-import { LogoTopBar } from "../../components/LogoTopBar";
+import { LogoTopBar } from "../../components/LogoTopBar/index.js";
 import UpdateGroupModal from "./UpdateGroupModal";
 import DeleteGroupModal from "./DeleteGroupModal";
+import { dummyPosts } from "./dummyPosts.js";
+import PostItem from "./PostItem/index.js";
 
 const Group = () => {
   const { groupId } = useParams();
@@ -27,6 +20,7 @@ const Group = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+  //group
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [isPublic, setIsPublic] = useState(true);
@@ -35,6 +29,10 @@ const Group = () => {
   const [badges, setBadges] = useState([]);
   const [postCount, setPostCount] = useState(0);
   const [dday, setDDay] = useState(0);
+
+  // 게시물 목록 상태
+  const [posts, setPosts] = useState([]);
+
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -53,7 +51,12 @@ const Group = () => {
       setDDay(265);
     };
 
+    const fetchGroupPosts = () => {
+      setPosts(dummyPosts);
+    };
+
     fetchGroupInfo();
+    fetchGroupPosts();
   }, []);
 
   const handleShowPublic = () => {
@@ -100,7 +103,7 @@ const Group = () => {
       {showDeleteModal && (
         <DeleteGroupModal handleCloseModal={handleCloseDeleteModal} />
       )}
-      <div className="home-container">
+      <div className="group-layout">
         <div className="info-container">
           <img src={imageUrl} alt="그룹 사진" className="group-image" />
           <div className="info-content">
@@ -173,7 +176,6 @@ const Group = () => {
               추억 올리기
             </button>
           </div>
-
           <div className="post-mid-container">
             <button
               className={`public-button ${isPublicView ? "active" : ""}`}
@@ -194,24 +196,28 @@ const Group = () => {
               placeholder="태그 혹은 제목을 입력해주세요"
             />
           </div>
+          <div className="posts-list">
+            {posts
+              .filter(
+                (post) =>
+                  (post.isPublic === isPublicView && // 공개 여부 필터
+                    post.title.includes(searchQuery)) ||
+                  post.tags.some((tag) => tag.includes(searchQuery))
+              ) // 검색어 필터 적용
+              .map((post) => (
+                <PostItem
+                  key={post.id}
+                  nickname={post.nickname}
+                  title={post.title}
+                  imageUrl={post.imageUrl}
+                  tags={post.tags}
+                  location={post.location}
+                  moment={post.moment}
+                  handleClick={() => navigate(`/posts/${post.id}`)} // 게시물 클릭 시 동작 추가
+                />
+              ))}
+          </div>
 
-          {isPublicView ? (
-            <div className="posts-list">
-              <img src={publicPost} alt="공개글1" className="post" />
-              <img src={publicPost2} alt="공개글2" className="post" />
-              <img src={publicPost3} alt="공개글3" className="post" />
-              <img src={publicPost4} alt="공개글4" className="post" />
-              <img src={publicPost5} alt="공개글5" className="post" />
-            </div>
-          ) : (
-            <div className="posts-list">
-              <img src={privatePost} alt="비공개글1" className="post" />
-              <img src={privatePost} alt="비공개글2" className="post" />
-              <img src={privatePost} alt="비공개글3" className="post" />
-              <img src={privatePost} alt="비공개글4" className="post" />
-              <img src={privatePost} alt="비공개글5" className="post" />
-            </div>
-          )}
           <button className="load-more-btn">더보기</button>
         </div>
       </div>
