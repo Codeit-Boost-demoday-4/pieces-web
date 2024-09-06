@@ -7,6 +7,7 @@ import {
   HomeLayout,
   PostsContainer,
   PostMidContainer,
+  Post,
   PostsList,
   LoadMoreBtn,
 } from "./styles.js";
@@ -34,7 +35,7 @@ const Home = () => {
           keyword: searchQuery,
         },
       });
-      
+
       const { data, currentPage, totalPages } = response.data;
 
       setGroups((prevGroups) => (pageNumber === 1 ? data : [...prevGroups, ...data]));
@@ -61,9 +62,14 @@ const Home = () => {
     navigate("/makegroup");
   };
 
+  useEffect(() => {
+    fetchGroups(isPublicView, 1);
+  }, [isPublicView, searchQuery]);
+
   const handleGroupClick = (groupId) => {
     navigate(`/group/${groupId}`);
   };
+
 
   const LogoComponent = () => {
     return <img src={logo} alt="Logo" style={{ display: 'block', margin: '0 auto' }} />;
@@ -117,13 +123,16 @@ const Home = () => {
                 <img src={group.imageUrl} alt={group.name} />
                 <h3>{group.name}</h3>
                 <p>{group.introduction}</p>
-                <div>좋아요: {group.likeCount}</div>
-                <div>뱃지: {group.badgeCount}</div>
-                <div>포스트: {group.postCount}</div>
-                <div>생성일: {new Date(group.createdAt).toLocaleDateString()}</div>
+                <span className="info-row">
+                  <span>좋아요: {group.likeCount}</span>
+                  <span>뱃지: {group.badgeCount}</span>
+                  <span>포스트: {group.postCount}</span>
+                </span>
+                <span className="date-row">생성일: {new Date(group.createdAt).toLocaleDateString()}</span>
               </div>
             ))}
           </PostsList>
+
           
           {page < totalPages && (
             <LoadMoreBtn onClick={loadMoreGroups} disabled={loading}>
@@ -137,4 +146,3 @@ const Home = () => {
 };
 
 export default Home;
-
