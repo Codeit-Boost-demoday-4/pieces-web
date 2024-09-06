@@ -10,19 +10,21 @@ import {
   PostsList,
   LoadMoreBtn,
 } from "./styles.js";
+import logo from '../../assets/memories/logo.png';
+import PostItem from '../Group/PostItem/index.js';
+import { dummyPosts } from "../Group/dummyPosts.js";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [isPublicView, setIsPublicView] = useState(true); // 공개/비공개 필터
-  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태
-  const [groups, setGroups] = useState([]); // 서버에서 받은 그룹 리스트 상태
-  const [page, setPage] = useState(1); // 페이지 상태
-  const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수
-  const [loading, setLoading] = useState(false); // 로딩 상태 관리
+  const [isPublicView, setIsPublicView] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [groups, setGroups] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-  // 공개/비공개 그룹을 서버에서 가져오는 함수
   const fetchGroups = async (isPublic, pageNumber = 1) => {
-    setLoading(true); // 로딩 시작
+    setLoading(true);
     try {
       const response = await api.get("/api/groups", {
         params: {
@@ -35,23 +37,20 @@ const Home = () => {
       
       const { data, currentPage, totalPages } = response.data;
 
-      // 데이터 업데이트
       setGroups((prevGroups) => (pageNumber === 1 ? data : [...prevGroups, ...data]));
       setPage(currentPage);
       setTotalPages(totalPages);
     } catch (error) {
       console.error("그룹 데이터를 가져오는 중 에러 발생:", error);
     } finally {
-      setLoading(false); // 로딩 끝
+      setLoading(false);
     }
   };
 
-  // 공개/비공개 그룹 필터 변경 시 데이터 불러오기
   useEffect(() => {
-    fetchGroups(isPublicView, 1); // 첫 페이지부터 다시 가져옴
+    fetchGroups(isPublicView, 1);
   }, [isPublicView, searchQuery]);
 
-  // "더보기" 버튼 클릭 시 다음 페이지의 그룹 가져오기
   const loadMoreGroups = () => {
     if (page < totalPages) {
       fetchGroups(isPublicView, page + 1);
@@ -59,12 +58,30 @@ const Home = () => {
   };
 
   const handleCreateGroup = () => {
-    navigate("/create-group");
+    navigate("/makegroup");
   };
 
   const handleGroupClick = (groupId) => {
     navigate(`/group/${groupId}`);
   };
+
+  const LogoComponent = () => {
+    return <img src={logo} alt="Logo" style={{ display: 'block', margin: '0 auto' }} />;
+  };
+
+  const handlePostClick = (post) => {
+    if (isPublicView) {
+      handleGroupClick(post.groupId); // post 객체에서 groupId를 가져옵니다.
+    } else {
+      navigate("/GroupAuth");
+    }
+  };
+
+  const filteredPosts = dummyPosts.filter(
+    (post) =>
+      post.isPublic === isPublicView &&
+      (post.title.includes(searchQuery) || post.tags.some(tag => tag.includes(searchQuery)))
+  );
 
   return (
     <>
@@ -120,3 +137,4 @@ const Home = () => {
 };
 
 export default Home;
+

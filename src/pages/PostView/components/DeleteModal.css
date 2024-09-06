@@ -1,0 +1,49 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* 불투명한 검정색 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999; /* 모달보다 아래에 위치 */
+}
+
+.modal {
+    position: fixed; /* 절대 위치 대신 고정 위치 사용 */
+    width: 40px;
+    height: 25px;
+    left: 50%; /* 화면의 가로 중앙 */
+    top: 50%; /* 화면의 세로 중앙 */
+    transform: translate(-50%, -50%); /* 모달 크기의 절반만큼 이동 */
+    background-color: #FAFAFA;
+    border: 1px solid #DDD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1000; /* 모달이 다른 요소 위에 보이도록 */
+}
+.modal-content {
+    text-align: center;
+}
+
+input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%;
+}
+
+.confirm {
+    padding: 10px 20px;
+    background-color: #282828;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.confirm:hover {
+    background-color: #0056b3;
+}

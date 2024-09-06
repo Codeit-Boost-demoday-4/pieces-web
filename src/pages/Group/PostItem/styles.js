@@ -68,4 +68,6 @@ export const TagList = styled.div` // 태그리스트
   text-align: left;
   margin-bottom: 30px;
   color: #b8b8b8 // 태그의 색상 회색
+<<<<<<< HEAD
 `;
+

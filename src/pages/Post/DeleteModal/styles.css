@@ -1,49 +1,83 @@
-.overlay {
+/* 모달 오버레이 (배경 어둡게) */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* 불투명한 검정색 */
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* 어두운 배경 */
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 999; /* 모달보다 아래에 위치 */
-}
-
-.modal {
-    position: fixed; /* 절대 위치 대신 고정 위치 사용 */
-    width: 40px;
-    height: 25px;
-    left: 50%; /* 화면의 가로 중앙 */
-    top: 50%; /* 화면의 세로 중앙 */
-    transform: translate(-50%, -50%); /* 모달 크기의 절반만큼 이동 */
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* 그룹 삭제 모달 내용 */
+  .delete-modal-content {
+    /*width: 480px;*/
+    /*height: 335px;*/
     background-color: #FAFAFA;
-    border: 1px solid #DDD;
+    border-radius: 6px;
+    padding: 40px;
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    z-index: 1000; /* 모달이 다른 요소 위에 보이도록 */
-}
-.modal-content {
+    gap: 30px;
+  }
+  
+  /* 그룹 삭제 제목 */
+  .delete-modal-title {
+    width: 100%; /* 너비를 모달의 전체 너비로 설정 */
+    height: 30px;
+    font-family: 'Spoqa Han Sans Neo', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #282828;
     text-align: center;
-}
+    margin: 0 auto; /* 텍스트를 중앙에 배치 */
+    line-height: 30px; /* 텍스트 높이를 맞춰 줄바꿈 방지 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  }
 
-input {
-    margin: 10px 0;
-    padding: 10px;
-    width: 80%;
-}
-
-.confirm {
-    padding: 10px 20px;
-    background-color: #282828;
-    color: white;
+  .close-btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: transparent;
     border: none;
-    cursor: pointer;
-}
+  }
 
-.confirm:hover {
-    background-color: #0056b3;
-}
+  .container{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 삭제 권한 인증 텍스트 */
+  .delete-modal-label {
+    font-family: 'Spoqa Han Sans Neo', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #282828;
+    margin-bottom: 10px; /* 비밀번호 입력칸과의 간격을 줄여서 바로 위에 위치 */
+  }
+  
+  /* 비밀번호 입력창 */
+  .delete-modal-input {
+    width: 400px;
+    height: 45px;
+    background-color: #FAFAFA;
+    border: 1px solid #DDDDDD;
+    border-radius: 6px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* 삭제하기 버튼 */
+  .delete-submit-button {
+    width: 400px;
+    height: 50px;
+    background-color: #282828;
+    color: #FFFFFF;
+    border-radius: 6px;
+    cursor: pointer;
+  }
