@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../api.js"; // axios 인스턴스
 import {
   BadgeItem,
   GroupLayout,
@@ -73,9 +73,7 @@ const Group = () => {
 
       //서버 연결
       try {
-        const response = await axios.get(
-          `https://pieces-server.onrender.com/api/groups/${groupId}`
-        );
+        const response = await api.get(`/api/groups/${groupId}`);
 
         if (response.status === 200 || response.status === 201) {
           const groupData = response.data;
@@ -86,13 +84,8 @@ const Group = () => {
           setIsPublic(groupData.isPublic);
           setIntroduction(groupData.introduction);
           setLikeCount(groupData.likeCount);
-          setBadges(groupData.badges);
+          setBadges(groupData.badges || []);
           setPostCount(groupData.postCount);
-          setBadges([
-            "7일 연속 추억 등록",
-            "그룹 공감 1만 개 이상 받기",
-            "추억 공감 1만 개 이상 받기",
-          ]);
 
           // createdAt 날짜를 기준으로 D-Day 계산
           const createdAtDate = new Date(groupData.createdAt);

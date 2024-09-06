@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "./styles.css";
-import axios from "axios";
+import "./styles.js";
+import api from "../../../api";
 import closeButton from "../../../assets/close-button.svg";
 
 const CreateGroup = () => {
@@ -46,8 +46,8 @@ const CreateGroup = () => {
         introduction,
       };
 
-      const response = await axios.post(
-        `https://pieces-server.onrender.com/api/groups`,
+      const response = await api.post(
+        `/api/groups`,
         groupData
       );
 
@@ -55,6 +55,7 @@ const CreateGroup = () => {
       if (response.status === 200 || response.status === 201) {
         alert("그룹이 성공적으로 생성되었습니다!");
         handleCloseModal();
+        navigate(`/group/${response.data.id}`);
       } else {
         throw new Error(response.data.message || "Failed");
       }
