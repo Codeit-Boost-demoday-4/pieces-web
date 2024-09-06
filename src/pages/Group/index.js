@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import {
   BadgeItem,
   GroupLayout,
@@ -20,9 +21,10 @@ import {
   PostsList,
   LoadMoreBtn,
 } from "./styles.js";
+=======
+>>>>>>> d47c3a00b2c55024c781c302e98e35f80eff9a00
 import sendLike from "../../assets/group/sendLike.svg";
 import likeAnimation from "../../assets/group/likeAnimation.svg";
-import searchIcon from "../../assets/group/searchIcon.svg";
 import groupPhoto from "../../assets/group/그룹사진.png";
 
 import { LogoTopBar } from "../../components/LogoTopBar/index.js";
@@ -30,6 +32,37 @@ import UpdateGroupModal from "./UpdateGroupModal";
 import DeleteGroupModal from "./DeleteGroupModal";
 import { dummyPosts } from "./dummyPosts.js";
 import PostItem from "./PostItem/index.js";
+import {
+  GroupLayout,
+  InfoContainer,
+  GroupImage,
+  InfoContent,
+  TopContainer,
+  DDay,
+  StatusPublic,
+  EditButton,
+  DeleteButton,
+  TitleContainer,
+  GroupName,
+  PostCount,
+  LikeCount,
+  Introduction,
+  BadgeContainer,
+  BadgeText,
+  BadgeList,
+  BadgeItem,
+  SympathyButton,
+  LikeAnimation,
+  PostsContainer,
+  PostTopContainer,
+  PostText,
+  PostUploadBtn,
+  PostMidContainer,
+  PublicButton,
+  SearchInput,
+  PostsList,
+  LoadMoreBtn,
+} from "./styles"; // styled-components import
 
 const Group = () => {
   const { groupId } = useParams();
@@ -39,7 +72,7 @@ const Group = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  //group
+  // 그룹 정보 상태
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [isPublic, setIsPublic] = useState(true);
@@ -51,7 +84,6 @@ const Group = () => {
 
   // 게시물 목록 상태
   const [posts, setPosts] = useState([]);
-
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -115,15 +147,13 @@ const Group = () => {
     <>
       <LogoTopBar />
 
-      {/* 그룹 정보 수정 모달 */}
       {showModal && <UpdateGroupModal handleCloseModal={handleCloseModal} />}
-
-      {/* 그룹 삭제 모달 */}
       {showDeleteModal && (
         <DeleteGroupModal handleCloseModal={handleCloseDeleteModal} />
       )}
       <GroupLayout>
         <InfoContainer>
+<<<<<<< HEAD
           <img src={imageUrl} alt="그룹 사진" />
           <InfoContent>
             <TopContainer>
@@ -154,12 +184,31 @@ const Group = () => {
                 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {`그룹 공감 ${likeCount}`}
               </span>
+=======
+          <GroupImage src={imageUrl} alt="그룹 사진" />
+          <InfoContent>
+            <TopContainer>
+              <DDay>{`D+${dday}`}</DDay>
+              <StatusPublic>|&nbsp;&nbsp;&nbsp;{isPublic ? "공개" : "비공개"}</StatusPublic>
+              <EditButton onClick={handleTextClick}>그룹 정보 수정</EditButton>
+              <DeleteButton onClick={handleDeleteClick}>그룹 삭제하기</DeleteButton>
+            </TopContainer>
+
+            <TitleContainer>
+              <GroupName>{name}</GroupName>
+              <PostCount>{`추억 ${postCount}`}</PostCount>
+              <LikeCount>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{`그룹 공감 ${likeCount}`}</LikeCount>
+>>>>>>> d47c3a00b2c55024c781c302e98e35f80eff9a00
             </TitleContainer>
 
             <Introduction>{introduction}</Introduction>
 
             <BadgeContainer>
+<<<<<<< HEAD
               <span>획득 배지</span>
+=======
+              <BadgeText>획득 배지</BadgeText>
+>>>>>>> d47c3a00b2c55024c781c302e98e35f80eff9a00
               <BadgeList>
                 {badges.map((badge, index) => (
                   <BadgeItem key={index}>
@@ -169,6 +218,7 @@ const Group = () => {
               </BadgeList>
             </BadgeContainer>
 
+<<<<<<< HEAD
             {/* 공감 보내기 버튼 */}
             <SympathyButton
               src={sendLike}
@@ -201,23 +251,43 @@ const Group = () => {
               className={`public-btn ${!isPublicView ? "active" : ""}`}
               onClick={handleShowPrivate}
             >
+=======
+            <SympathyButton src={sendLike} onClick={handleSympathyClick} />
+            {showSympathy && <LikeAnimation src={likeAnimation} />}
+          </InfoContent>
+        </InfoContainer>
+
+        <PostsContainer>
+          <PostTopContainer>
+            <PostText>추억 목록</PostText>
+            <PostUploadBtn onClick={handleUploadClick}>추억 올리기</PostUploadBtn>
+          </PostTopContainer>
+          <PostMidContainer>
+            <PublicButton className={isPublicView ? "active" : ""} onClick={handleShowPublic}>
+              공개
+            </PublicButton>
+            <PublicButton className={!isPublicView ? "active" : ""} onClick={handleShowPrivate}>
+>>>>>>> d47c3a00b2c55024c781c302e98e35f80eff9a00
               비공개
-            </button>
-            <input
-              className="search-input"
+            </PublicButton>
+            <SearchInput
               type="text"
               value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="태그 혹은 제목을 입력해주세요"
             />
           </PostMidContainer>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d47c3a00b2c55024c781c302e98e35f80eff9a00
           <PostsList>
             {posts
               .filter(
                 (post) =>
-                  (post.isPublic === isPublicView && // 공개 여부 필터
-                    post.title.includes(searchQuery)) ||
+                  (post.isPublic === isPublicView && post.title.includes(searchQuery)) ||
                   post.tags.some((tag) => tag.includes(searchQuery))
-              ) // 검색어 필터 적용
+              )
               .map((post) => (
                 <PostItem
                   key={post.id}
@@ -227,7 +297,7 @@ const Group = () => {
                   tags={post.tags}
                   location={post.location}
                   moment={post.moment}
-                  handleClick={() => navigate(`/posts/${post.id}`)} // 게시물 클릭 시 동작 추가
+                  handleClick={() => navigate(`/posts/${post.id}`)}
                 />
               ))}
           </PostsList>
