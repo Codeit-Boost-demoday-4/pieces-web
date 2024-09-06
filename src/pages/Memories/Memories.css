@@ -1,0 +1,505 @@
+
+.memories-container {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background-color: #FAFAFA;
+}
+
+/* 로고 스타일 */
+.logo {
+  position: absolute;
+  width: 137px;
+  height: 48px;
+  left: 50%;
+  top: 26px;
+}
+
+/* 닉네임 라벨 스타일 */
+.nickname-label {
+  position: absolute;
+  width: 44px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 480px);
+  top: 268px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 닉네임 입력창 스타일 */
+.nickname-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 480px);
+  top: 298px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 제목 라벨 스타일 */
+.title-label {
+  position: absolute;
+  width: 29px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 480px);
+  top: 383px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 제목 입력창 스타일 */
+.title-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 480px);
+  top: 413px;
+  background: #FAFAFA;
+  border: 1px solid #282828;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 이미지 라벨 스타일 */
+.image-label {
+  position: absolute;
+  width: 44px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 480px);
+  top: 498px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 이미지 입력창 스타일 */
+.image-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 290px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 480px);
+  top: 528px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 파일 선택 버튼 스타일 */
+.file-button-container {
+  position: absolute;
+  width: 100px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 780px);
+  top: 528px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-button-image {
+  position: absolute;
+  width: 100%; /* 버튼 전체 크기에 맞춤 */
+  height: 100%; /* 버튼 전체 크기에 맞춤 */
+  top: 0;
+  left: 0;
+}
+
+.file-button-text {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  z-index: 1; /* 텍스트를 이미지 위로 올림 */
+  text-align: center;
+}
+
+/* 본문 라벨 스타일 */
+.content-label {
+  position: absolute;
+  width: 44px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 480px);
+  top: 613px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 본문 입력창 스타일 */
+.content-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  height: 150px;
+  left: calc(50% - 1920px / 2 + 480px);
+  top: 643px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+  resize: none; /* 사용자가 텍스트 박스 크기 조정 못하게 함 */
+}
+
+/* 태그 라벨 스타일 */
+.tag-label {
+  position: absolute;
+  width: 44px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 268px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 태그 입력창 스타일 */
+.tag-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 298px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 장소 라벨 스타일 */
+.place-label {
+  position: absolute;
+  width: 44px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 434px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 장소 입력창 스타일 */
+.place-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 464px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 추억의 순간 라벨 스타일 */
+.moment-label {
+  position: absolute;
+  width: 88px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 549px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 추억의 순간 입력창 스타일 */
+.moment-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 579px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.moment-input::placeholder {
+  color: #999; /* 원하는 색상으로 변경 */
+  font-style: italic; /* 원하는 스타일로 변경 */
+}
+
+/* 비밀번호 라벨 스타일 */
+.password-label {
+  position: absolute;
+  width: 66px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 768px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 비밀번호 입력창 스타일 */
+.password-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 798px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+
+}
+
+.password-input::placeholder {
+  color: #999; /* 원하는 색상으로 변경 */
+  font-style: italic; /* 원하는 스타일로 변경 */
+}
+
+/* 추억 공개 선택 컨테이너 */
+.public-toggle-container {
+  position: absolute;
+  width: 120px; /* 필요에 따라 width를 늘려볼 수 있음 */
+  height: 64px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 664px;
+  display: flex;
+  flex-direction: column; /* 수직 정렬 */
+  align-items: flex-start;
+  overflow: visible; /* 텍스트가 잘리지 않도록 */
+  z-index: 1;
+}
+
+
+.public-label {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px; /* 닉네임 등과 같은 글씨 크기 */
+  line-height: 20px;
+  color: #282828;
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  margin-bottom: 8px; /* 공개 텍스트와의 간격 */
+}
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 왼쪽 정렬로 텍스트와 스위치 정렬 */
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* 공개/비공개 텍스트 */
+.public-text {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #282828;
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-55%); /* 수직 중앙에서 5% 더 위로 이동 */
+  margin-right: 10px;
+  white-space: nowrap;
+  z-index: 9999;
+}
+
+
+
+
+/* 토글 스위치 */
+.toggle-switch {
+  width: 40px;
+  height: 20px;
+  background-color: #282828; /* 기본 검정색 배경 */
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  padding: 2px;
+  transition: background-color 0.3s ease;
+  margin-left: 50px; /* 스위치를 오른쪽으로 40px 이동 */
+}
+
+.toggle-switch.private {
+  background-color: #DDDDDD; /* 비공개일 때 배경색 */
+}
+
+.switch-handle {
+  width: 16px;
+  height: 16px;
+  background-color: #FFFFFF; /* 흰색 스위치 버튼 */
+  border-radius: 50%;
+  position: absolute;
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch.public .switch-handle {
+  transform: translateX(0);
+}
+
+.toggle-switch.private .switch-handle {
+  transform: translateX(20px); /* 비공개일 때 오른쪽으로 이동 */
+}
+
+/* 태그 라벨 스타일 */
+.tag-label {
+  position: absolute;
+  width: 44px;
+  height: 20px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 268px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.03em;
+  color: #282828;
+  white-space: nowrap;
+}
+
+/* 태그 입력창 스타일 */
+.tag-input {
+  box-sizing: border-box;
+  position: absolute;
+  width: 400px;
+  height: 45px;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 298px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* 태그 리스트 스타일 */
+.tag-list {
+  position: absolute;
+  left: calc(50% - 1920px / 2 + 1040px);
+  top: 353px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  background-color: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 0 8px;
+  height: 30px;
+}
+
+.tag-text {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17.53px;
+  color: #282828;
+  margin-right: 5px;
+}
+
+.tag-image {
+  width: 33px;
+  height: 18px;
+}
+
+.tag-delete {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* 올리기 버튼 스타일 */
+.submit-button {
+  position: absolute;
+  width: 400px;
+  height: 50px;
+  left: calc(50% - 1920px / 2 + 761px);
+  top: 903px;
+  background-color: #282828;
+  color: #FFFFFF;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #4a4a4a; /* 버튼에 마우스를 올렸을 때 색상 변화 */
+}
