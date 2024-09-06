@@ -27,7 +27,6 @@ import groupPhoto from "../../assets/group/그룹사진.png";
 import { LogoTopBar } from "../../components/LogoTopBar/index.js";
 import UpdateGroupModal from "./UpdateGroupModal";
 import DeleteGroupModal from "./DeleteGroupModal";
-import { dummyPosts } from "./dummyPosts.js";
 import PostItem from "./PostItem/index.js";
 
 const Group = () => {
@@ -38,9 +37,7 @@ const Group = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-
   // 그룹 상태
-  // 그룹 정보 상태
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [isPublic, setIsPublic] = useState(true);
@@ -52,20 +49,17 @@ const Group = () => {
 
   // 게시물 목록 상태
   const [posts, setPosts] = useState([]);
-
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [sortBy, setSortBy] = useState('latest');
 
   useEffect(() => {
     const fetchGroupInfo = async () => {
-
-      //서버 연결
       try {
         const response = await api.get(`/api/groups/${groupId}`);
-
         if (response.status === 200 || response.status === 201) {
           const groupData = response.data;
-
-          // 서버로부터 받은 데이터를 상태에 반영
           setName(groupData.name);
           setImageUrl(groupData.imageUrl || groupPhoto); // 기본 이미지를 사용할 경우
           setIsPublic(groupData.isPublic);
@@ -74,11 +68,10 @@ const Group = () => {
           setBadges(groupData.badges || []);
           setPostCount(groupData.postCount);
 
-          // createdAt 날짜를 기준으로 D-Day 계산
           const createdAtDate = new Date(groupData.createdAt);
           const currentDate = new Date();
           const diffTime = Math.abs(currentDate - createdAtDate);
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // 밀리초를 일 수로 변환
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
           setDDay(diffDays);
         } else {
           throw new Error(response.data.message || "Failed");
@@ -88,13 +81,30 @@ const Group = () => {
       }
     };
 
-    const fetchGroupPosts = () => {
-      setPosts(dummyPosts);
+    const fetchGroupPosts = async () => {
+      try {
+        const response = await api.get(`/api/groups/${groupId}/posts`, {
+          params: {
+            page: currentPage,
+            pageSize: pageSize,
+            sortBy: sortBy,
+            keyword: searchQuery,
+            isPublic: isPublicView
+          }
+        });
+        if (response.status === 200 || response.status === 201) {
+          setPosts(response.data.data);
+        } else {
+          throw new Error(response.data.message || "Failed");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     fetchGroupInfo();
     fetchGroupPosts();
-  }, []);
+  }, [groupId, currentPage, pageSize, sortBy, searchQuery, isPublicView]);
 
   const handleShowPublic = () => {
     setIsPublicView(true);
@@ -133,10 +143,7 @@ const Group = () => {
     <>
       <LogoTopBar />
 
-      {/* 그룹 정보 수정 모달 */}
       {showModal && <UpdateGroupModal handleCloseModal={handleCloseModal} />}
-
-      {/* 그룹 삭제 모달 */}
       {showDeleteModal && (
         <DeleteGroupModal handleCloseModal={handleCloseDeleteModal} />
       )}
@@ -183,12 +190,9 @@ const Group = () => {
                 ))}
               </BadgeList>
             </BadgeContainer>
-            {/* 공감 보내기 버튼 */}
             <SendLikeButton onClick={handleSympathyClick}>
               <span>공감 보내기</span>
             </SendLikeButton>
-
-            {/* 공감 애니메이션 */}
             {showSympathy && (
               <LikeAnimation src={likeAnimation} alt="공감 애니메이션" />
             )}
@@ -220,16 +224,16 @@ const Group = () => {
               type="text"
               value={searchQuery}
               placeholder="태그 혹은 제목을 입력해주세요"
-              onChange={(e) => setSearchQuery(e.target.value)} // 검색어 상태 업데이트
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </PostMidContainer>
           <PostsList>
             {posts
               .filter(
                 (post) =>
-                  post.isPublic === isPublicView && // 공개 여부 필터
-                  (post.title.includes(searchQuery) || // 제목 필터
-                   post.tags.some((tag) => tag.includes(searchQuery))) // 태그 필터
+                  post.isPublic === isPublicView &&
+                  (post.title.includes(searchQuery) ||
+                   post.tags.some((tag) => tag.includes(searchQuery)))
               )
               .map((post) => (
                 <PostItem
@@ -237,12 +241,12 @@ const Group = () => {
                   key={post.id}
                   nickname={post.nickname}
                   title={post.title}
-                  imageUrl={post.imageUrl} // 이미지 URL 전달
+                  imageUrl={post.imageUrl}
                   tags={post.tags}
                   location={post.location}
                   moment={post.moment}
-                  showImage={isPublicView} // 공개일 때만 이미지 표시
-                  handleClick={() => navigate(`/posts/${post.id}`)} // 게시물 클릭 시 동작 추가
+                  showImage={isPublicView}
+                  handleClick={() => navigate(`/posts/${post.id}`)}
                 />
               ))}
           </PostsList>
