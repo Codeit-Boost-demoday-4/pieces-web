@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css"; // CSS 파일 임포트
 import { LogoTopBar } from "../../components/LogoTopBar/index.js";
 import postimage from "../../assets/postimage.png"; // 포스트 이미지 임포트
@@ -7,26 +7,45 @@ import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
 import CommentModal from "./CommentModal"; // 댓글 모달 임포트
 import CommentSection from "./CommentSection";
+import api from "../../api.js"; // axios 인스턴스
+import { useParams } from "react-router-dom";
 
 const Post = () => {
+  const { postId } = useParams(); // 포스트 ID를 URL 파라미터로부터 가져오기
+  const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false); // 댓글 모달 상태
   const [editComment, setEditComment] = useState(null); // 수정할 댓글 상태
-  const [comments, setComments] = useState([
-    {
-      id: 1,
-      nickname: "사용자1",
-      text: "첫 번째 댓글입니다.",
-      password: "1234",
-    },
-    {
-      id: 2,
-      nickname: "사용자2",
-      text: "두 번째 댓글입니다.",
-      password: "5678",
-    },
-  ]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // 포스트와 댓글 데이터를 가져오는 함수
+  const fetchPostData = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await api.get(`/api/posts/${postId}`);
+      if (response.status === 200) {
+        const postData = response.data;
+        setPost(postData);
+        setComments(postData.comments || []);
+      } else {
+        throw new Error("Failed to fetch post data");
+      }
+    } catch (error) {
+      console.error("포스트 데이터를 가져오는 중 오류 발생:", error);
+      setError("포스트 데이터를 가져오는 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPostData(); // 컴포넌트 마운트 시 데이터 가져오기
+  }, [postId]);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -59,6 +78,18 @@ const Post = () => {
   const deleteComment = (id) => {
     setComments(comments.filter((comment) => comment.id !== id));
   };
+
+  if (loading) {
+    return <p>로딩 중...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!post) {
+    return <p>포스트를 찾을 수 없습니다.</p>;
+  }
 
   return (
     <>
@@ -94,30 +125,18 @@ const Post = () => {
               </button>
             </div>
           </div>
-          <h1 className="post-title">인천 앞바다에서 무려 60cm 월척을 낚다!</h1>
+          <h1 className="post-title">{post.title}</h1>
           <div className="post-info">
-            <span className="author">작성자: 당신이름</span>
-            <span className="date">24.01.19</span>
-            <span className="views">조회수: 120</span>
+            <span className="author">작성자: {post.author}</span>
+            <span className="date">{post.date}</span>
+            <span className="views">조회수: {post.views}</span>
             <span className="comments">댓글: {comments.length}</span>
           </div>
         </div>
 
         <div className="post-container">
-          <img src={postimage} alt="PostImage" className="post-image" />
-          <p className="post-content">
-            인천 앞바다에서 월척을 낚았습니다!
-            <br />
-            가족들과 기억에 오래도록 남을 멋진 하루였어요.
-            <br />
-            <br />
-            인천 앞바다에서 월척을 낚았습니다!
-            <br />
-            가족들과 기억에 오래도록 남을 멋진 하루였어요.
-            <br />
-            <br />
-            인천 앞바다에서 월척을 낚았습니다!
-          </p>
+          <img src={post.imageUrl || postimage} alt="PostImage" className="post-image" />
+          <p className="post-content">{post.content}</p>
           <button
             onClick={() => setIsCommenting(true)}
             className="add-comment-button"

@@ -57,21 +57,6 @@ const Group = () => {
 
   useEffect(() => {
     const fetchGroupInfo = async () => {
-      /*
-      //더미데이터
-      setName("달봉이네 가족");
-      setImageUrl(groupPhoto);
-      setIsPublic(false);
-      setIntroduction("서로 한 마음으로 응원하고 아끼는 달봉이네 가족입니다.");
-      setLikeCount(8);
-      setBadges([
-        "7일 연속 추억 등록",
-        "그룹 공감 1만 개 이상 받기",
-        "추억 공감 1만 개 이상 받기",
-      ]);
-      setPostCount(8);
-      setDDay(265);
-      */
 
       //서버 연결
       try {
@@ -248,6 +233,7 @@ const Group = () => {
               )
               .map((post) => (
                 <PostItem
+                  groupId={groupId}
                   key={post.id}
                   nickname={post.nickname}
                   title={post.title}

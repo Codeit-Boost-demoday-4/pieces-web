@@ -7,7 +7,6 @@ import Post from "./pages/Post";
 
 import MakeGroup from "./pages/Home/makegroup";
 import GroupAuth from "./pages/Home/GroupAuth";
-import CreateGroup from "./pages/Group/CreateGroup";
 
 class App extends React.Component {
   render() {
@@ -15,7 +14,6 @@ class App extends React.Component {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create-group" element={<CreateGroup />} />
           <Route path="/group/:groupId" element={<Group />} />
           <Route path="/group/:groupId/upload" element={<Upload />} />
           <Route path="/posts/:postId" element={<Post />} />

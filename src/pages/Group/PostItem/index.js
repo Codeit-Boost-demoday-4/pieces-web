@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PostLayout, InfoContainer, Title, TagList } from "./styles";
+import api from "../../../api.js"; // axios 인스턴스
 
 const PostItem = ({
   handleClick,
