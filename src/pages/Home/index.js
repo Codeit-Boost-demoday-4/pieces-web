@@ -7,13 +7,10 @@ import {
   HomeLayout,
   PostsContainer,
   PostMidContainer,
-  Post,
   PostsList,
   LoadMoreBtn,
 } from "./styles.js";
 import logo from '../../assets/memories/logo.png';
-import PostItem from '../Group/PostItem/index.js';
-import { dummyPosts } from "../Group/dummyPosts.js";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -70,24 +67,9 @@ const Home = () => {
     navigate(`/group/${groupId}`);
   };
 
-
   const LogoComponent = () => {
     return <img src={logo} alt="Logo" style={{ display: 'block', margin: '0 auto' }} />;
   };
-
-  const handlePostClick = (post) => {
-    if (isPublicView) {
-      handleGroupClick(post.groupId); // post 객체에서 groupId를 가져옵니다.
-    } else {
-      navigate("/GroupAuth");
-    }
-  };
-
-  const filteredPosts = dummyPosts.filter(
-    (post) =>
-      post.isPublic === isPublicView &&
-      (post.title.includes(searchQuery) || post.tags.some(tag => tag.includes(searchQuery)))
-  );
 
   return (
     <>
@@ -120,7 +102,10 @@ const Home = () => {
           <PostsList>
             {groups.map((group) => (
               <div key={group.id} onClick={() => handleGroupClick(group.id)}>
-                <img src={group.imageUrl} alt={group.name} />
+                {/* 비공개 그룹의 경우 imgUrl을 조건적으로 렌더링 */}
+                {isPublicView || group.isPublic ? (
+                  <img src={group.imageUrl} alt={group.name} />
+                ) : null}
                 <h3>{group.name}</h3>
                 <p>{group.introduction}</p>
                 <span className="info-row">
@@ -133,7 +118,6 @@ const Home = () => {
             ))}
           </PostsList>
 
-          
           {page < totalPages && (
             <LoadMoreBtn onClick={loadMoreGroups} disabled={loading}>
               {loading ? "로딩 중..." : "더보기"}

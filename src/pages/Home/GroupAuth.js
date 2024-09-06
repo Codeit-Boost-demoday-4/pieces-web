@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../api.js"; // axios 인스턴스
 import { LogoTopBar } from "../../components/LogoTopBar/index.js"; // LogoTopBar 임포트
 import "./styles.css";
 
@@ -12,8 +12,8 @@ const GroupAuth = () => {
     setIsLoading(true);
     setMessage(""); // 이전 메시지 초기화
     try {
-      const response = await axios.post(
-        `/auth/group`, // 인증 요청을 보낼 엔드포인트
+      const response = await api.post(
+        `/api/groups/{id}/verify-password`, // 인증 요청을 보낼 엔드포인트
         { password }
       );
 
