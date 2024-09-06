@@ -1,6 +1,24 @@
 import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import "./styles.css";
+import {
+  ModalOverlay,
+  ModalContent,
+  ModalTitle,
+  CloseButton,
+  Container,
+  ModalLabel,
+  ModalInput,
+  ImageUpload,
+  ImageInput,
+  FileSelectButton,
+  ModalTextarea,
+  SwitchContainer,
+  Switch,
+  SwitchCircle,
+  SwitchLabel,
+  EditSubmitButton,
+  EditSuccessMessage,
+} from "./styles.js";
 import axios from "axios";
 import closeButton from "../../../assets/close-button.svg";
 
@@ -15,14 +33,13 @@ const UpdateGroupModal = ({ handleCloseModal }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditSuccess, setIsEditSuccess] = useState(false);
 
-  // Input 요소를 참조하기 위한 ref 설정
   const fileInputRef = useRef(null);
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
-      setImageUrl(fileUrl); // 선택한 이미지의 URL을 상태에 저장
+      setImageUrl(fileUrl);
     }
   };
 
@@ -47,7 +64,6 @@ const UpdateGroupModal = ({ handleCloseModal }) => {
         groupData
       );
 
-      // 서버에서 성공적인 응답을 받은 경우
       if (response.status === 200 || response.status === 201) {
         alert("그룹 정보가 성공적으로 수정되었습니다!");
         handleCloseModal();
@@ -63,82 +79,75 @@ const UpdateGroupModal = ({ handleCloseModal }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={handleCloseModal}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h2 className="modal-title">그룹 정보 수정</h2>
+    <ModalOverlay onClick={handleCloseModal}>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
+        <ModalTitle>그룹 정보 수정</ModalTitle>
 
-        <button className="close-btn" onClick={handleCloseModal}>
+        <CloseButton onClick={handleCloseModal}>
           <img src={closeButton} alt="닫기" width={30} height={30} />
-        </button>
+        </CloseButton>
 
-        <div className="container">
-          <label className="modal-label">그룹명</label>
-          <input
+        <Container>
+          <ModalLabel>그룹명</ModalLabel>
+          <ModalInput
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="modal-input"
             placeholder="그룹명을 입력해 주세요"
           />
-        </div>
+        </Container>
 
-        <div className="container">
-          <label className="modal-label">대표 이미지</label>
-          <div className="image-upload">
-            <input
+        <Container>
+          <ModalLabel>대표 이미지</ModalLabel>
+          <ImageUpload>
+            <ImageInput
               ref={fileInputRef}
               type="file"
               accept="image/*"
-              className="modal-input image-input"
-              placeholder="대표 이미지를 첨부해 주세요"
               onChange={handleFileSelect}
             />
-            <button className="file-select-button">파일 선택</button>
-          </div>
-        </div>
+            <FileSelectButton>파일 선택</FileSelectButton>
+          </ImageUpload>
+        </Container>
 
-        <div className="container">
-          <label className="modal-label">그룹 소개</label>
-          <textarea
-            className="modal-textarea"
+        <Container>
+          <ModalLabel>그룹 소개</ModalLabel>
+          <ModalTextarea
             value={introduction}
             onChange={(e) => setIntroduction(e.target.value)}
             placeholder="그룹을 소개해 주세요"
-          ></textarea>
-        </div>
+          />
+        </Container>
 
-        <div className="container">
-          <label className="modal-label">그룹 공개 선택</label>
-          <div className="switch-container" onClick={handleSwitchToggle}>
-            <div className={`switch ${isSwitchOn ? "on" : "off"}`}>
-              <div className="switch-circle"></div>
-            </div>
-            <span className="switch-label">
-              {isSwitchOn ? "공개" : "비공개"}
-            </span>
-          </div>
-        </div>
+        <Container>
+          <ModalLabel>그룹 공개 선택</ModalLabel>
+          <SwitchContainer onClick={handleSwitchToggle}>
+            <Switch isOn={isSwitchOn}>
+              <SwitchCircle isOn={isSwitchOn} />
+            </Switch>
+            <SwitchLabel>{isSwitchOn ? "공개" : "비공개"}</SwitchLabel>
+          </SwitchContainer>
+        </Container>
 
-        <div className="container">
-          <label className="modal-label">수정 권한 인증</label>
-          <input
+        <Container>
+          <ModalLabel>수정 권한 인증</ModalLabel>
+          <ModalInput
             type="password"
-            className="modal-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="비밀번호를 입력해 주세요"
           />
-        </div>
+        </Container>
 
-        <button className="edit-submit-button" onClick={handleEditSubmit}>
+        <EditSubmitButton onClick={handleEditSubmit}>
           {isLoading ? "수정 중..." : "수정하기"}
-        </button>
+        </EditSubmitButton>
 
         {isEditSuccess && (
-          <div className="edit-success-message">수정이 완료되었습니다!</div>
+          <EditSuccessMessage>수정이 완료되었습니다!</EditSuccessMessage>
         )}
-      </div>
-    </div>
+      </ModalContent>
+    </ModalOverlay>
   );
 };
 

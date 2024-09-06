@@ -1,6 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./styles.css";
+import api from "../../api.js"; // axios 인스턴스
+import {
+  BadgeItem,
+  GroupLayout,
+  InfoContainer,
+  InfoContent,
+  TopContainer,
+  TitleContainer,
+  Introduction,
+  BadgeContainer,
+  BadgeList,
+  SendLikeButton,
+  LikeAnimation,
+  PostsContainer,
+  PostTopContainer,
+  PostMidContainer,
+  PostsList,
+  LoadMoreBtn,
+} from "./styles.js";
 import sendLike from "../../assets/group/sendLike.svg";
 import likeAnimation from "../../assets/group/likeAnimation.svg";
 import searchIcon from "../../assets/group/searchIcon.svg";
@@ -20,7 +38,9 @@ const Group = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+
   // 그룹 상태
+  // 그룹 정보 상태
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [isPublic, setIsPublic] = useState(true);
@@ -36,7 +56,9 @@ const Group = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const fetchGroupInfo = () => {
+    const fetchGroupInfo = async () => {
+      /*
+      //더미데이터
       setName("달봉이네 가족");
       setImageUrl(groupPhoto);
       setIsPublic(false);
@@ -49,6 +71,36 @@ const Group = () => {
       ]);
       setPostCount(8);
       setDDay(265);
+      */
+
+      //서버 연결
+      try {
+        const response = await api.get(`/api/groups/${groupId}`);
+
+        if (response.status === 200 || response.status === 201) {
+          const groupData = response.data;
+
+          // 서버로부터 받은 데이터를 상태에 반영
+          setName(groupData.name);
+          setImageUrl(groupData.imageUrl || groupPhoto); // 기본 이미지를 사용할 경우
+          setIsPublic(groupData.isPublic);
+          setIntroduction(groupData.introduction);
+          setLikeCount(groupData.likeCount);
+          setBadges(groupData.badges || []);
+          setPostCount(groupData.postCount);
+
+          // createdAt 날짜를 기준으로 D-Day 계산
+          const createdAtDate = new Date(groupData.createdAt);
+          const currentDate = new Date();
+          const diffTime = Math.abs(currentDate - createdAtDate);
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // 밀리초를 일 수로 변환
+          setDDay(diffDays);
+        } else {
+          throw new Error(response.data.message || "Failed");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     const fetchGroupPosts = () => {
@@ -103,80 +155,69 @@ const Group = () => {
       {showDeleteModal && (
         <DeleteGroupModal handleCloseModal={handleCloseDeleteModal} />
       )}
-      <div className="group-layout">
-        <div className="info-container">
-          <img src={imageUrl} alt="그룹 사진" className="group-image" />
-          <div className="info-content">
-            <div className="top-container">
-              <div className="dday">{`D+${dday}`}</div>
-              <div className="status-public">
+      <GroupLayout>
+        <InfoContainer>
+          <img src={imageUrl} alt="그룹 사진" />
+          <InfoContent>
+            <TopContainer>
+              <span className="dday">{`D+${dday}`}</span>
+              <span className="is-public">
                 |&nbsp;&nbsp;&nbsp;{isPublic ? "공개" : "비공개"}
-              </div>
+              </span>
               <div
-                className="edit-button"
+                className="edit-btn"
                 onClick={handleTextClick}
                 style={{ cursor: "pointer" }}
               >
                 그룹 정보 수정
               </div>
               <div
-                className="delete-button"
+                className="delete-btn"
                 onClick={handleDeleteClick}
                 style={{ cursor: "pointer" }}
               >
                 그룹 삭제하기
               </div>
-            </div>
-
-            <div className="title-container">
+            </TopContainer>
+            <TitleContainer>
               <span className="group-name">{name}</span>
               <span className="post-count">{`추억 ${postCount}`}</span>
               <span className="like-count">
                 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {`그룹 공감 ${likeCount}`}
               </span>
-            </div>
-
-            <p className="introduction">{introduction}</p>
-
-            <div className="badge-container">
-              <span className="badge-text">획득 배지</span>
-              <div className="badge-list">
+            </TitleContainer>
+            <Introduction>{introduction}</Introduction>
+            <BadgeContainer>
+              <span>획득 배지</span>
+              <BadgeList>
                 {badges.map((badge, index) => (
-                  <div key={index} className="badge-item">
+                  <BadgeItem key={index}>
                     <span>{badge}</span>
-                  </div>
+                  </BadgeItem>
                 ))}
-              </div>
-            </div>
-
+              </BadgeList>
+            </BadgeContainer>
             {/* 공감 보내기 버튼 */}
-            <img
-              src={sendLike}
-              alt="공감 보내기 버튼"
-              className="sympathy-button"
-              onClick={handleSympathyClick}
-            />
+            <SendLikeButton onClick={handleSympathyClick}>
+              <span>공감 보내기</span>
+            </SendLikeButton>
 
             {/* 공감 애니메이션 */}
             {showSympathy && (
-              <img
-                src={likeAnimation}
-                alt="공감 애니메이션"
-                className="like-animation"
-              />
+              <LikeAnimation src={likeAnimation} alt="공감 애니메이션" />
             )}
-          </div>
-        </div>
+          </InfoContent>
+        </InfoContainer>
 
-        <div className="posts-container">
-          <div className="post-top-container">
-            <span className="post-text">추억 목록</span>
+        <PostsContainer>
+          <PostTopContainer>
+            <span>추억 목록</span>
             <button onClick={handleUploadClick} className="post-upload-btn">
               추억 올리기
             </button>
-          </div>
-          <div className="post-mid-container">
+          </PostTopContainer>
+          <PostMidContainer>
             <button
               className={`public-button ${isPublicView ? "active" : ""}`}
               onClick={handleShowPublic}
@@ -184,7 +225,7 @@ const Group = () => {
               공개
             </button>
             <button
-              className={`public-button ${!isPublicView ? "active" : ""}`}
+              className={`public-btn ${!isPublicView ? "active" : ""}`}
               onClick={handleShowPrivate}
             >
               비공개
@@ -196,8 +237,8 @@ const Group = () => {
               placeholder="태그 혹은 제목을 입력해주세요"
               onChange={(e) => setSearchQuery(e.target.value)} // 검색어 상태 업데이트
             />
-          </div>
-          <div className="posts-list">
+          </PostMidContainer>
+          <PostsList>
             {posts
               .filter(
                 (post) =>
@@ -218,11 +259,11 @@ const Group = () => {
                   handleClick={() => navigate(`/posts/${post.id}`)} // 게시물 클릭 시 동작 추가
                 />
               ))}
-          </div>
+          </PostsList>
 
-          <button className="load-more-btn">더보기</button>
-        </div>
-      </div>
+          <LoadMoreBtn>더보기</LoadMoreBtn>
+        </PostsContainer>
+      </GroupLayout>
     </>
   );
 };

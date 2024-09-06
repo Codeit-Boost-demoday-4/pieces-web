@@ -1,105 +1,140 @@
-// Home.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import MakeGroup from './makegroup';
-import GroupAuth from './GroupAuth.js';
+import { LogoTopBar } from "../../components/LogoTopBar/index.js";
+import api from "../../api.js"; // axios 인스턴스
+import {
+  CreateGroupBtn,
+  HomeLayout,
+  PostsContainer,
+  PostMidContainer,
+  PostsList,
+  LoadMoreBtn,
+} from "./styles.js";
 import logo from '../../assets/memories/logo.png';
 import PostItem from '../Group/PostItem/index.js';
 import { dummyPosts } from "../Group/dummyPosts.js";
 
 const Home = () => {
-    const navigate = useNavigate();
-    const [isPublicView, setIsPublicView] = useState(true);
-    const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+  const [isPublicView, setIsPublicView] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [groups, setGroups] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-    const groupId = 1;
+  const fetchGroups = async (isPublic, pageNumber = 1) => {
+    setLoading(true);
+    try {
+      const response = await api.get("/api/groups", {
+        params: {
+          isPublic,
+          page: pageNumber,
+          pageSize: 10,
+          keyword: searchQuery,
+        },
+      });
+      
+      const { data, currentPage, totalPages } = response.data;
 
-    const handleCreateGroup = () => {
-        navigate("/makegroup");
-    };
+      setGroups((prevGroups) => (pageNumber === 1 ? data : [...prevGroups, ...data]));
+      setPage(currentPage);
+      setTotalPages(totalPages);
+    } catch (error) {
+      console.error("그룹 데이터를 가져오는 중 에러 발생:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const handleShowPublic = () => {
-        setIsPublicView(true);
-    };
+  useEffect(() => {
+    fetchGroups(isPublicView, 1);
+  }, [isPublicView, searchQuery]);
 
-    const handleShowPrivate = () => {
-        setIsPublicView(false);
-    };
+  const loadMoreGroups = () => {
+    if (page < totalPages) {
+      fetchGroups(isPublicView, page + 1);
+    }
+  };
 
-    const handleGroupClick = () => {
-        navigate(`/group/${groupId}`);
-    };
+  const handleCreateGroup = () => {
+    navigate("/makegroup");
+  };
 
-    const LogoComponent = () => {
-        return <img src={logo} alt="Logo" style={{ display: 'block', margin: '0 auto' }} />;
-    };
+  const handleGroupClick = (groupId) => {
+    navigate(`/group/${groupId}`);
+  };
 
-    const handlePostClick = (post) => {
-        if (isPublicView) {
-            handleGroupClick();
-        } else {
-            navigate("/GroupAuth");
-        }
-    };
+  const LogoComponent = () => {
+    return <img src={logo} alt="Logo" style={{ display: 'block', margin: '0 auto' }} />;
+  };
 
-    const filteredPosts = dummyPosts.filter(
-        (post) =>
-            post.isPublic === isPublicView && 
-            (post.title.includes(searchQuery) || post.tags.some(tag => tag.includes(searchQuery)))
-    );
+  const handlePostClick = (post) => {
+    if (isPublicView) {
+      handleGroupClick(post.groupId); // post 객체에서 groupId를 가져옵니다.
+    } else {
+      navigate("/GroupAuth");
+    }
+  };
 
-    return (
-        <>
-            <button onClick={handleCreateGroup} className="create-group-btn">
-                그룹 만들기
+  const filteredPosts = dummyPosts.filter(
+    (post) =>
+      post.isPublic === isPublicView &&
+      (post.title.includes(searchQuery) || post.tags.some(tag => tag.includes(searchQuery)))
+  );
+
+  return (
+    <>
+      <LogoTopBar />
+      <CreateGroupBtn onClick={handleCreateGroup}>그룹 만들기</CreateGroupBtn>
+      <HomeLayout>
+        <PostsContainer>
+          <PostMidContainer>
+            <button
+              className={`public-button ${isPublicView ? "active" : ""}`}
+              onClick={() => setIsPublicView(true)}
+            >
+              공개
             </button>
-            <div className="header-container">
-                <LogoComponent />
-            </div>
-            <div className="home-layout">
-                <div className="posts-container">
-                    <div className="post-mid-container">
-                        <button
-                            className={`public-button ${isPublicView ? "active" : ""}`}
-                            onClick={handleShowPublic}
-                        >
-                            공개
-                        </button>
-                        <button
-                            className={`public-button ${!isPublicView ? "active" : ""}`}
-                            onClick={handleShowPrivate}
-                        >
-                            비공개
-                        </button>
-                        <input
-                            className="search-input"
-                            type="text"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="태그 혹은 제목을 입력해주세요"
-                        />
-                    </div>
+            <button
+              className={`public-button ${!isPublicView ? "active" : ""}`}
+              onClick={() => setIsPublicView(false)}
+            >
+              비공개
+            </button>
+            <input
+              className="search-input"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="태그 혹은 제목을 입력해주세요"
+            />
+          </PostMidContainer>
 
-                    <div className="posts-list">
-                        {filteredPosts.map((post) => (
-                            <PostItem
-                                key={post.id}
-                                nickname={post.nickname}
-                                title={post.title}
-                                imageUrl={post.imageUrl}
-                                tags={post.tags}
-                                location={post.location}
-                                moment={post.moment}
-                                handleClick={() => handlePostClick(post)}
-                                showImage={isPublicView} // 이미지를 표시할지 여부
-                            />
-                        ))}
-                    </div>
-                    <button className="load-more-btn">더보기</button>
-                </div>
-            </div>
-        </>
-    );
+          <PostsList>
+            {groups.map((group) => (
+              <div key={group.id} onClick={() => handleGroupClick(group.id)}>
+                <img src={group.imageUrl} alt={group.name} />
+                <h3>{group.name}</h3>
+                <p>{group.introduction}</p>
+                <div>좋아요: {group.likeCount}</div>
+                <div>뱃지: {group.badgeCount}</div>
+                <div>포스트: {group.postCount}</div>
+                <div>생성일: {new Date(group.createdAt).toLocaleDateString()}</div>
+              </div>
+            ))}
+          </PostsList>
+          
+          {page < totalPages && (
+            <LoadMoreBtn onClick={loadMoreGroups} disabled={loading}>
+              {loading ? "로딩 중..." : "더보기"}
+            </LoadMoreBtn>
+          )}
+        </PostsContainer>
+      </HomeLayout>
+    </>
+  );
 };
 
 export default Home;
+

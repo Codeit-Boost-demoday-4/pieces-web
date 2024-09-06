@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "./styles.css";
 import closeButton from "../../../assets/close-button.svg";
+import {
+  ModalOverlay,
+  DeleteModalContent,
+  DeleteModalTitle,
+  CloseButton,
+  Container,
+  DeleteModalLabel,
+  DeleteModalInput,
+  DeleteSubmitButton,
+} from "./styles"; // styles.js 파일에서 불러오기
 
 const DeleteGroupModal = ({ handleCloseModal }) => {
   const { groupId } = useParams();
@@ -19,7 +28,6 @@ const DeleteGroupModal = ({ handleCloseModal }) => {
         }
       );
 
-      // 서버에서 성공적인 응답을 받은 경우
       if (response.status === 200 || response.status === 201) {
         alert("그룹이 성공적으로 삭제되었습니다!");
         handleCloseModal();
@@ -35,30 +43,26 @@ const DeleteGroupModal = ({ handleCloseModal }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={handleCloseModal}>
-      <div
-        className="delete-modal-content"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <h2 className="delete-modal-title">그룹 삭제</h2>
-        <button className="close-btn" onClick={handleCloseModal}>
+    <ModalOverlay onClick={handleCloseModal}>
+      <DeleteModalContent onClick={(e) => e.stopPropagation()}>
+        <DeleteModalTitle>그룹 삭제</DeleteModalTitle>
+        <CloseButton onClick={handleCloseModal}>
           <img src={closeButton} alt="닫기" width={30} height={30} />
-        </button>
-        <div className="container">
-          <label className="delete-modal-label">삭제 권한 인증</label>
-          <input
+        </CloseButton>
+        <Container>
+          <DeleteModalLabel>삭제 권한 인증</DeleteModalLabel>
+          <DeleteModalInput
             type="password"
-            className="delete-modal-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="비밀번호를 입력해 주세요"
           />
-        </div>
-        <button className="delete-submit-button" onClick={handleDeleteGroup}>
+        </Container>
+        <DeleteSubmitButton onClick={handleDeleteGroup}>
           {isLoading ? "삭제 중" : "삭제하기"}
-        </button>
-      </div>
-    </div>
+        </DeleteSubmitButton>
+      </DeleteModalContent>
+    </ModalOverlay>
   );
 };
 
