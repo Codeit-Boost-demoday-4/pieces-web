@@ -156,24 +156,43 @@ export const BadgeItem = styled.div`
   justify-content: center;
   align-items: center;
   height: 52px;
-  border-radius: 26px;
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
   background-color: #f4f4f4;
-  color: black;
+  border-radius: 26px;
   padding: 0 20px;
+
+  span {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #282828;
+  }
 `;
 
-export const SympathyButton = styled.img`
+export const SendLikeButton = styled.button`
   position: absolute;
   width: 187.88px;
   height: 52px;
   right: 0;
   bottom: 100px;
-  background: none;
-  border: none;
+  background: #fafafa;
+  border: solid 1px #282828;
+  border-radius: 6px;
   cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  span {
+    font-family: Spoqa Han Sans Neo;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20.03px;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: #282828;
+  }
 `;
 
 export const LikeAnimation = styled.img`
