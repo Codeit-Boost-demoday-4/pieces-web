@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { LogoTopBar } from "../../components/LogoTopBar/index.js";
 
-const Group = () => {
+const Home = () => {
   const navigate = useNavigate();
   const [isPublicView, setIsPublicView] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -67,4 +67,4 @@ const Group = () => {
   );
 };
 
-export default Group;
+export default Home;
