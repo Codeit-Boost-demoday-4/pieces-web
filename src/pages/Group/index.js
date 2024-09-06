@@ -20,7 +20,7 @@ const Group = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  //group
+  // 그룹 상태
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [isPublic, setIsPublic] = useState(true);
@@ -194,25 +194,27 @@ const Group = () => {
               type="text"
               value={searchQuery}
               placeholder="태그 혹은 제목을 입력해주세요"
+              onChange={(e) => setSearchQuery(e.target.value)} // 검색어 상태 업데이트
             />
           </div>
           <div className="posts-list">
             {posts
               .filter(
                 (post) =>
-                  (post.isPublic === isPublicView && // 공개 여부 필터
-                    post.title.includes(searchQuery)) ||
-                  post.tags.some((tag) => tag.includes(searchQuery))
-              ) // 검색어 필터 적용
+                  post.isPublic === isPublicView && // 공개 여부 필터
+                  (post.title.includes(searchQuery) || // 제목 필터
+                   post.tags.some((tag) => tag.includes(searchQuery))) // 태그 필터
+              )
               .map((post) => (
                 <PostItem
                   key={post.id}
                   nickname={post.nickname}
                   title={post.title}
-                  imageUrl={post.imageUrl}
+                  imageUrl={post.imageUrl} // 이미지 URL 전달
                   tags={post.tags}
                   location={post.location}
                   moment={post.moment}
+                  showImage={isPublicView} // 공개일 때만 이미지 표시
                   handleClick={() => navigate(`/posts/${post.id}`)} // 게시물 클릭 시 동작 추가
                 />
               ))}

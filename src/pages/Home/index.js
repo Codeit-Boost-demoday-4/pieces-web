@@ -1,8 +1,11 @@
+// Home.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MakeGroup from './makegroup';
+import GroupAuth from './GroupAuth.js';
 import logo from '../../assets/memories/logo.png';
-
+import PostItem from '../Group/PostItem/index.js';
+import { dummyPosts } from "../Group/dummyPosts.js";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -12,7 +15,7 @@ const Home = () => {
     const groupId = 1;
 
     const handleCreateGroup = () => {
-        navigate("/makegroup"); // makegroup으로 이동
+        navigate("/makegroup");
     };
 
     const handleShowPublic = () => {
@@ -30,6 +33,20 @@ const Home = () => {
     const LogoComponent = () => {
         return <img src={logo} alt="Logo" style={{ display: 'block', margin: '0 auto' }} />;
     };
+
+    const handlePostClick = (post) => {
+        if (isPublicView) {
+            handleGroupClick();
+        } else {
+            navigate("/GroupAuth");
+        }
+    };
+
+    const filteredPosts = dummyPosts.filter(
+        (post) =>
+            post.isPublic === isPublicView && 
+            (post.title.includes(searchQuery) || post.tags.some(tag => tag.includes(searchQuery)))
+    );
 
     return (
         <>
@@ -63,11 +80,21 @@ const Home = () => {
                         />
                     </div>
 
-                    {isPublicView ? (
-                        <div className="posts-list"></div>
-                    ) : (
-                        <div className="posts-list"></div>
-                    )}
+                    <div className="posts-list">
+                        {filteredPosts.map((post) => (
+                            <PostItem
+                                key={post.id}
+                                nickname={post.nickname}
+                                title={post.title}
+                                imageUrl={post.imageUrl}
+                                tags={post.tags}
+                                location={post.location}
+                                moment={post.moment}
+                                handleClick={() => handlePostClick(post)}
+                                showImage={isPublicView} // 이미지를 표시할지 여부
+                            />
+                        ))}
+                    </div>
                     <button className="load-more-btn">더보기</button>
                 </div>
             </div>

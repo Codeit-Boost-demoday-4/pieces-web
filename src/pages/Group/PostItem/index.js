@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { PostLayout, InfoContainer, Title, TagList } from "./styles";
 
 const PostItem = ({
@@ -9,10 +9,11 @@ const PostItem = ({
   imageUrl,
   location,
   moment,
+  showImage, // showImage prop 추가
 }) => {
   return (
     <PostLayout onClick={handleClick}>
-      <img src={imageUrl} />
+      {showImage && <img src={imageUrl} alt={title} />} {/* showImage에 따라 이미지 표시 */}
       <InfoContainer>
         <span>{nickname}</span>
         <Title>{title}</Title>
