@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { LogoTopBar } from "../../components/LogoTopBar/index.js";
+import {
+  CreateGroupBtn,
+  HomeLayout,
+  PostsContainer,
+  PostMidContainer,
+  PostsList,
+  LoadMoreBtn,
+} from "./styles.js";
 
-const Group = () => {
+const Home = () => {
   const navigate = useNavigate();
   const [isPublicView, setIsPublicView] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,12 +36,10 @@ const Group = () => {
   return (
     <>
       <LogoTopBar />
-      <button onClick={handleCreateGroup} className="create-group-btn">
-        그룹 만들기
-      </button>
-      <div className="home-layout">
-        <div className="posts-container">
-          <div className="post-mid-container">
+      <CreateGroupBtn onClick={handleCreateGroup}>그룹 만들기</CreateGroupBtn>
+      <HomeLayout>
+        <PostsContainer>
+          <PostMidContainer>
             <button
               className={`public-button ${isPublicView ? "active" : ""}`}
               onClick={handleShowPublic}
@@ -53,18 +58,14 @@ const Group = () => {
               value={searchQuery}
               placeholder="태그 혹은 제목을 입력해주세요"
             />
-          </div>
+          </PostMidContainer>
 
-          {isPublicView ? (
-            <div className="posts-list"></div>
-          ) : (
-            <div className="posts-list"></div>
-          )}
-          <button className="load-more-btn">더보기</button>
-        </div>
-      </div>
+          {isPublicView ? <PostsList></PostsList> : <PostsList></PostsList>}
+          <LoadMoreBtn>더보기</LoadMoreBtn>
+        </PostsContainer>
+      </HomeLayout>
     </>
   );
 };
 
-export default Group;
+export default Home;

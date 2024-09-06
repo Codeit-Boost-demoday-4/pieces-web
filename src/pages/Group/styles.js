@@ -22,13 +22,13 @@ export const InfoContainer = styled.div`
   height: 273px;
   padding: 60px 0 100px 0;
   border-bottom: solid 1px #dddddd;
-`;
 
-export const GroupImage = styled.img`
-  width: 262px;
-  height: 273px;
-  border-radius: 6px;
-  margin-right: 40px;
+  img {
+    width: 262px;
+    height: 273px;
+    border-radius: 6px;
+    margin-right: 40px;
+  }
 `;
 
 export const InfoContent = styled.div`
@@ -45,37 +45,41 @@ export const TopContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
 
-export const DDay = styled.div`
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  margin-right: 15px;
-`;
+  .dday {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.03px;
+    margin-right: 15px;
+  }
 
-export const StatusPublic = styled.div`
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-`;
+  .is-public {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.03px;
+  }
 
-export const EditButton = styled.div`
-  margin-left: auto;
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #282828;
-  cursor: pointer;
-`;
+  .edit-btn {
+    margin-left: auto;
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17.53px;
+    text-align: center;
+    color: #282828;
+    cursor: pointer;
+  }
 
-export const DeleteButton = styled.div`
-  margin-left: 20px;
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #a0a0a0;
-  cursor: pointer;
+  .delete-btn {
+    margin-left: 20px;
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #a0a0a0;
+    cursor: pointer;
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -84,33 +88,40 @@ export const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
 
-export const GroupName = styled.span`
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 37.56px;
-  letter-spacing: -0.03em;
-`;
+  .group-name {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 37.56px;
+    letter-spacing: -0.03em;
+  }
 
-export const PostCount = styled.span`
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0 30px;
-`;
+  .post-count {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22.54px;
+    letter-spacing: -0.03em;
+    margin: 0 30px;
+  }
 
-export const LikeCount = styled.span`
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 18px;
-  font-weight: 700;
+  .like-count {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22.54px;
+    letter-spacing: -0.03em;
+  }
 `;
 
 export const Introduction = styled.p`
   font-family: "Spoqa Han Sans Neo", sans-serif;
   font-size: 18px;
   font-weight: 400;
+  line-height: 22.54px;
+  letter-spacing: -0.03em;
+  margin: 0;
 `;
 
 export const BadgeContainer = styled.div`
@@ -118,20 +129,25 @@ export const BadgeContainer = styled.div`
   flex-direction: column;
   position: absolute;
   bottom: 100px;
+  width: auto;
   max-width: calc(100% - 200px);
   overflow-x: auto;
+  scrollbar-width: none;
   margin-top: 20px;
-`;
 
-export const BadgeText = styled.span`
-  font-family: "Spoqa Han Sans Neo", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 20px;
+  span {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20.03px;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
 `;
 
 export const BadgeList = styled.div`
   display: flex;
+  flex-direction: row;
   gap: 10px;
 `;
 
@@ -140,23 +156,43 @@ export const BadgeItem = styled.div`
   justify-content: center;
   align-items: center;
   height: 52px;
-  border-radius: 26px;
-  font-family: "Spoqa Han Sans Neo";
-  font-size: 16px;
-  font-weight: 500;
   background-color: #f4f4f4;
+  border-radius: 26px;
   padding: 0 20px;
+
+  span {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #282828;
+  }
 `;
 
-export const SympathyButton = styled.img`
+export const SendLikeButton = styled.button`
   position: absolute;
   width: 187.88px;
   height: 52px;
   right: 0;
   bottom: 100px;
-  background: none;
-  border: none;
+  background: #fafafa;
+  border: solid 1px #282828;
+  border-radius: 6px;
   cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  span {
+    font-family: Spoqa Han Sans Neo;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20.03px;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: #282828;
+  }
 `;
 
 export const LikeAnimation = styled.img`
@@ -185,6 +221,20 @@ export const LikeAnimation = styled.img`
   }
 `;
 
+export const FamilyText = styled.span`
+  position: absolute;
+  width: 167px;
+  height: 38px;
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 37.56px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: black; /* 글씨 색상 */
+  white-space: nowrap;
+`;
+
 export const PostsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -199,70 +249,100 @@ export const PostTopContainer = styled.div`
   position: relative;
   width: 100%;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-`;
 
-export const PostText = styled.span`
-  font-family: "Spoqa Han Sans Neo";
-  font-size: 24px;
-  font-weight: 700;
-  color: #282828;
-`;
+  span {
+    font-family: "Spoqa Han Sans Neo"; /* 글꼴 */
+    font-style: normal;
+    font-weight: 700; /* 글꼴 두께 */
+    font-size: 24px; /* 글꼴 크기 */
+    line-height: 30px; /* 줄 간격 */
+    letter-spacing: -0.03em; /* 자간 */
+    color: #282828; /* 텍스트 색상 */
+  }
 
-export const PostUploadBtn = styled.button`
-  position: absolute;
-  width: 200px;
-  height: 45px;
-  right: 0;
-  background-color: #282828;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  font-family: "Spoqa Han Sans Neo";
-  font-size: 14px;
-  font-weight: 700;
+  .post-upload-btn {
+    position: absolute;
+    width: 200px;
+    height: 45px;
+    right: 0;
+    background-color: #282828;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-family: Spoqa Han Sans Neo;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17.53px;
+    letter-spacing: -0.03em;
+    text-align: center;
+  }
 `;
 
 export const PostMidContainer = styled.div`
   position: relative;
   width: 100%;
   display: flex;
+  flex-direction: row;
   align-items: center;
-`;
 
-export const PublicButton = styled.button`
-  width: 66px;
-  height: 45px;
-  background: none;
-  color: #282828;
-  border-radius: 22.5px;
-  border: none;
-  font-family: "Spoqa Han Sans Neo";
-  font-weight: 700;
-  font-size: 14px;
-  margin-right: 10px;
+  .public-btn {
+    width: 66px;
+    height: 45px;
+    background: none;
+    color: #282828;
+    border-radius: 22.5px;
+    border: none;
+    font-family: "Spoqa Han Sans Neo";
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 10px;
 
-  &.active {
-    background: #282828;
-    color: white;
+    &.active {
+      background: #282828;
+      color: #ffffff; /* 활성화된 버튼은 흰색 글씨 */
+    }
+  }
+
+  .search-input {
+    width: 1186px;
+    padding: 0 10px;
+    height: 45px;
+    background: #f4f4f4;
+    border-radius: 6px;
+    border: none;
   }
 `;
 
-export const SearchInput = styled.input`
-  width: 1186px;
-  padding: 0 10px;
+/*
+/* 그룹상세페이지공개추억.png (공감순.png) 
+.reaction-order {
+  position: absolute;
+  width: 160px;
   height: 45px;
-  background: #f4f4f4;
+  left: calc(50% + 1560px / 2 - 160px); /* profile_all의 오른쪽 라인에 맞춤 
+  top: calc(250px + 273px + 100px + 120px + 100px + 1px); /* 태그 혹은 제목을 입력해 주세요.png와 동일한 top 값 
+  background: #F4F4F4;
   border-radius: 6px;
-  border: none;
-`;
+}
+*/
 
 export const PostsList = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+`;
+
+export const Post = styled.div`
+  box-sizing: border-box;
+  width: auto;
+  height: 370px;
+  background: #fafafa;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
 `;
 
 export const LoadMoreBtn = styled.button`
@@ -272,8 +352,9 @@ export const LoadMoreBtn = styled.button`
   border-radius: 6px;
   background-color: #fafafa;
   color: #282828;
-  font-family: "Spoqa Han Sans Neo";
+  font-family: Spoqa Han Sans Neo;
   font-size: 14px;
   font-weight: 700;
+  text-align: center;
   margin-bottom: 40px;
 `;
