@@ -63,8 +63,12 @@ const Home = () => {
     fetchGroups(isPublicView, 1);
   }, [isPublicView, searchQuery]);
 
-  const handleGroupClick = (groupId) => {
-    navigate(`/group/${groupId}`);
+  const handleGroupClick = async (groupId, isPublic) => {
+    if (isPublic || isPublicView) {
+      navigate(`/group/${groupId}`);
+    } else {
+      navigate(`/groupauth/${groupId}`);
+    }
   };
 
   const LogoComponent = () => {
@@ -101,7 +105,7 @@ const Home = () => {
 
           <PostsList>
             {groups.map((group) => (
-              <div key={group.id} onClick={() => handleGroupClick(group.id)}>
+              <div key={group.id} onClick={() => handleGroupClick(group.id, group.isPublic)}>
                 {/* 비공개 그룹의 경우 imgUrl을 조건적으로 렌더링 */}
                 {isPublicView || group.isPublic ? (
                   <img src={group.imageUrl} alt={group.name} />
