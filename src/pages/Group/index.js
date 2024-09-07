@@ -52,7 +52,7 @@ const Group = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const [sortBy, setSortBy] = useState('latest');
+  const [sortBy, setSortBy] = useState("latest");
 
   useEffect(() => {
     const fetchGroupInfo = async () => {
@@ -88,8 +88,8 @@ const Group = () => {
             pageSize: pageSize,
             sortBy: sortBy,
             keyword: searchQuery,
-            isPublic: isPublicView
-          }
+            isPublic: isPublicView,
+          },
         });
         if (response.status === 200 || response.status === 201) {
           setPosts(response.data.data);
@@ -100,12 +100,12 @@ const Group = () => {
         console.error(error);
       }
     };
-    
+
     const fetchGroupBadges = async () => {
       try {
         const response = await api.get(`/api/badges/${groupId}`);
         if (response.status === 200 || response.status === 201) {
-          const badgeNames = response.data.map(badge => badge.name); // name만 추출
+          const badgeNames = response.data.map((badge) => badge.name); // name만 추출
           setBadges(badgeNames); // badges 상태에 name만 저장
         } else {
           throw new Error(response.data.message || "Failed to load badges");
@@ -146,7 +146,6 @@ const Group = () => {
       alert("공감 보내기에 실패했습니다.");
     }
   };
-
 
   const handleTextClick = () => {
     setShowModal(true);
@@ -212,7 +211,7 @@ const Group = () => {
             <BadgeContainer>
               <span>획득 배지</span>
               <BadgeList>
-                {(badges && badges.length > 0) ? (
+                {badges && badges.length > 0 ? (
                   badges.map((badgeName, index) => (
                     <BadgeItem key={index}>
                       <span>{badgeName}</span>
@@ -220,7 +219,7 @@ const Group = () => {
                   ))
                 ) : (
                   <span>획득한 배지가 없습니다.</span>
-              )}
+                )}
               </BadgeList>
             </BadgeContainer>
             <SendLikeButton onClick={handleSympathyClick}>
@@ -241,7 +240,7 @@ const Group = () => {
           </PostTopContainer>
           <PostMidContainer>
             <button
-              className={`public-button ${isPublicView ? "active" : ""}`}
+              className={`public-btn ${isPublicView ? "active" : ""}`}
               onClick={handleShowPublic}
             >
               공개
@@ -266,7 +265,7 @@ const Group = () => {
                 (post) =>
                   post.isPublic === isPublicView &&
                   (post.title.includes(searchQuery) ||
-                   post.tags.some((tag) => tag.includes(searchQuery)))
+                    post.tags.some((tag) => tag.includes(searchQuery)))
               )
               .map((post) => (
                 <PostItem

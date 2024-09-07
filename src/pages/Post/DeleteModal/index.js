@@ -13,12 +13,9 @@ const DeleteGroupModal = ({ handleCloseModal }) => {
   const handleDeleteGroup = async () => {
     setIsLoading(true);
     try {
-      const response = await api.delete(
-        `/api/posts/${postId}`,
-        {
-          data: { password },
-        }
-      );
+      const response = await api.delete(`/api/posts/${postId}`, {
+        data: { password },
+      });
 
       // 서버에서 성공적인 응답을 받은 경우
       if (response.status === 200 || response.status === 201) {
@@ -65,4 +62,3 @@ const DeleteGroupModal = ({ handleCloseModal }) => {
 };
 
 export default DeleteGroupModal;
-
