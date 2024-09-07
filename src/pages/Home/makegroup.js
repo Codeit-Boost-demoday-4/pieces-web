@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import axios from "axios";
+import api from "../../api.js"; // axios 인스턴스
 import "./styles.css";
 import { LogoTopBar } from "../../components/LogoTopBar/index.js";
 
@@ -38,7 +38,7 @@ const MakeGroup = () => {
         introduction,
       };
 
-      const response = await axios.post(``, groupData);
+      const response = await api.post(``, groupData);
 
       if (response.status === 200 || response.status === 201) {
         alert("그룹이 성공적으로 생성되었습니다!");

@@ -65,7 +65,6 @@ const Group = () => {
           setIsPublic(groupData.isPublic);
           setIntroduction(groupData.introduction);
           setLikeCount(groupData.likeCount);
-          setBadges(groupData.badges || []);
           setPostCount(groupData.postCount);
 
           const createdAtDate = new Date(groupData.createdAt);
@@ -101,9 +100,24 @@ const Group = () => {
         console.error(error);
       }
     };
+    
+    const fetchGroupBadges = async () => {
+      try {
+        const response = await api.get(`/api/badges/${groupId}`);
+        if (response.status === 200 || response.status === 201) {
+          const badgeNames = response.data.map(badge => badge.name); // name만 추출
+          setBadges(badgeNames); // badges 상태에 name만 저장
+        } else {
+          throw new Error(response.data.message || "Failed to load badges");
+        }
+      } catch (error) {
+        console.error("Error fetching badges:", error);
+      }
+    };
 
     fetchGroupInfo();
     fetchGroupPosts();
+    fetchGroupBadges(); // 뱃지 데이터 가져오기
   }, [groupId, currentPage, pageSize, sortBy, searchQuery, isPublicView]);
 
   const handleShowPublic = () => {
@@ -114,10 +128,25 @@ const Group = () => {
     setIsPublicView(false);
   };
 
-  const handleSympathyClick = () => {
-    setShowSympathy(true);
-    setTimeout(() => setShowSympathy(false), 1000);
+  const handleSympathyClick = async () => {
+    try {
+      setShowSympathy(true);
+      setTimeout(() => setShowSympathy(false), 1000);
+
+      // 공감 보내기 API 호출
+      const response = await api.post(`/api/groups/${groupId}/like`);
+      if (response.status === 200 || response.status === 201) {
+        // 공감 수를 갱신
+        setLikeCount(likeCount + 1);
+      } else {
+        throw new Error("공감 보내기에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("공감 보내기에 실패했습니다.");
+    }
   };
+
 
   const handleTextClick = () => {
     setShowModal(true);
@@ -183,11 +212,15 @@ const Group = () => {
             <BadgeContainer>
               <span>획득 배지</span>
               <BadgeList>
-                {badges.map((badge, index) => (
-                  <BadgeItem key={index}>
-                    <span>{badge}</span>
-                  </BadgeItem>
-                ))}
+                {(badges && badges.length > 0) ? (
+                  badges.map((badgeName, index) => (
+                    <BadgeItem key={index}>
+                      <span>{badgeName}</span>
+                    </BadgeItem>
+                  ))
+                ) : (
+                  <span>획득한 배지가 없습니다.</span>
+              )}
               </BadgeList>
             </BadgeContainer>
             <SendLikeButton onClick={handleSympathyClick}>

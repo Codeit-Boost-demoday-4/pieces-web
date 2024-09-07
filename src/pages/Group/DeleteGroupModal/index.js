@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import api from "../../../api.js"; // axios 인스턴스
 import closeButton from "../../../assets/close-button.svg";
 import {
   ModalOverlay,
@@ -21,8 +21,8 @@ const DeleteGroupModal = ({ handleCloseModal }) => {
   const handleDeleteGroup = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.delete(
-        `https://pieces-server.onrender.com/api/groups/${groupId}`,
+      const response = await api.delete(
+        `/api/groups/${groupId}`,
         {
           data: { password },
         }

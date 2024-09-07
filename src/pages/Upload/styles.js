@@ -9,6 +9,11 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box; /* 추가 */
+  margin: 0; /* 추가 */
+  padding: 0; /* 추가 */
+  overflow: hidden; /* 추가 */
+
 
   .title {
     margin-top: 80px;

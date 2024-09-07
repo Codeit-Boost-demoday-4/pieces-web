@@ -19,7 +19,7 @@ import {
   EditSubmitButton,
   EditSuccessMessage,
 } from "./styles.js";
-import axios from "axios";
+import api from "../../../api.js"; // axios 인스턴스
 import closeButton from "../../../assets/close-button.svg";
 
 const UpdateGroupModal = ({ handleCloseModal }) => {
@@ -59,8 +59,8 @@ const UpdateGroupModal = ({ handleCloseModal }) => {
         introduction,
       };
 
-      const response = await axios.put(
-        `https://pieces-server.onrender.com/api/groups/${groupId}`,
+      const response = await api.put(
+        `/api/groups/${groupId}`,
         groupData
       );
 

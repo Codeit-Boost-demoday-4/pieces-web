@@ -113,7 +113,7 @@ const Home = () => {
                 <h3>{group.name}</h3>
                 <p>{group.introduction}</p>
                 <span className="info-row">
-                  <span>좋아요: {group.likeCount}</span>
+                  <span>공감: {group.likeCount}</span>
                   <span>뱃지: {group.badgeCount}</span>
                   <span>포스트: {group.postCount}</span>
                 </span>
