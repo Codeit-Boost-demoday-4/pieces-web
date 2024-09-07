@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import api from "../../api.js"; // axios 인스턴스
-import { LogoTopBar } from "../../components/LogoTopBar/index.js"; // LogoTopBar 임포트
+import api from "../../../api.js"; // axios 인스턴스
+import { LogoTopBar } from "../../../components/LogoTopBar/index.js"; // LogoTopBar 임포트
 import "./styles.css";
 import { useParams, useNavigate } from "react-router-dom"; // useParams와 useNavigate를 통해 groupId를 받습니다
 

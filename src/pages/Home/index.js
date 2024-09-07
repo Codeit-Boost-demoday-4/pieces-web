@@ -10,7 +10,6 @@ import {
   PostsList,
   LoadMoreBtn,
 } from "./styles.js";
-import logo from '../../assets/memories/logo.png';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -35,7 +34,9 @@ const Home = () => {
 
       const { data, currentPage, totalPages } = response.data;
 
-      setGroups((prevGroups) => (pageNumber === 1 ? data : [...prevGroups, ...data]));
+      setGroups((prevGroups) =>
+        pageNumber === 1 ? data : [...prevGroups, ...data]
+      );
       setPage(currentPage);
       setTotalPages(totalPages);
     } catch (error) {
@@ -71,10 +72,6 @@ const Home = () => {
     }
   };
 
-  const LogoComponent = () => {
-    return <img src={logo} alt="Logo" style={{ display: 'block', margin: '0 auto' }} />;
-  };
-
   return (
     <>
       <LogoTopBar />
@@ -105,7 +102,10 @@ const Home = () => {
 
           <PostsList>
             {groups.map((group) => (
-              <div key={group.id} onClick={() => handleGroupClick(group.id, group.isPublic)}>
+              <div
+                key={group.id}
+                onClick={() => handleGroupClick(group.id, group.isPublic)}
+              >
                 {/* 비공개 그룹의 경우 imgUrl을 조건적으로 렌더링 */}
                 {isPublicView || group.isPublic ? (
                   <img src={group.imageUrl} alt={group.name} />
@@ -117,7 +117,9 @@ const Home = () => {
                   <span>뱃지: {group.badgeCount}</span>
                   <span>포스트: {group.postCount}</span>
                 </span>
-                <span className="date-row">생성일: {new Date(group.createdAt).toLocaleDateString()}</span>
+                <span className="date-row">
+                  생성일: {new Date(group.createdAt).toLocaleDateString()}
+                </span>
               </div>
             ))}
           </PostsList>

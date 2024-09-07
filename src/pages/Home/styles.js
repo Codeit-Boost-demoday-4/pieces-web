@@ -95,7 +95,7 @@ export const PostMidContainer = styled.div`
   flex-direction: row;
   align-items: center;
 
-  .public-btn {
+  .public-button {
     width: 66px;
     height: 45px;
     background: none;
@@ -106,11 +106,11 @@ export const PostMidContainer = styled.div`
     font-weight: 700;
     font-size: 14px;
     margin-right: 10px;
+  }
 
-    &.active {
-      background: #282828;
-      color: #ffffff; /* 활성화된 버튼은 흰색 글씨 */
-    }
+  .public-button.active {
+    background: #282828;
+    color: #ffffff; /* 활성화된 버튼은 흰색 글씨 */
   }
 
   .search-input {
@@ -162,7 +162,7 @@ export const PostsList = styled.div`
     margin-bottom: 3px;
   }
   h3 {
-    font-family: 'Spoqa Han Sans Neo';
+    font-family: "Spoqa Han Sans Neo";
     font-size: 16px;
     font-weight: 700;
     line-height: 20.03px;
@@ -171,7 +171,7 @@ export const PostsList = styled.div`
     margin-bottom: 2px; /* 그룹 이름 아래 간격 */
   }
   p {
-    font-family: 'Spoqa Han Sans Neo';
+    font-family: "Spoqa Han Sans Neo";
     font-size: 16px;
     font-weight: 400;
     line-height: 20.03px;
@@ -182,7 +182,7 @@ export const PostsList = styled.div`
   .info-row {
     display: flex; /* 한 줄로 배치 */
     gap: 10px; /* 각 항목 사이에 간격 */
-    font-family: 'Spoqa Han Sans Neo';
+    font-family: "Spoqa Han Sans Neo";
     font-size: 12px;
     font-weight: 400;
     color: #999999; /* 회색 글씨 */
@@ -190,7 +190,7 @@ export const PostsList = styled.div`
     margin-bottom: 10px;
   }
   .date-row {
-    font-family: 'Spoqa Han Sans Neo';
+    font-family: "Spoqa Han Sans Neo";
     font-size: 14px;
     font-weight: 400;
     line-height: 17.53px;
