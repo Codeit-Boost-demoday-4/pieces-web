@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import api from "../../../api.js"; // axios 인스턴스
 import "./styles.css";
 import closeButton from "../../../assets/close-button.svg";
 
 const DeleteGroupModal = ({ handleCloseModal }) => {
-  const { groupId } = useParams();
+  const { postId } = useParams();
+  const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
 
   const handleDeleteGroup = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.delete(
-        `https://pieces-server.onrender.com/api/groups/${groupId}`,
+      const response = await api.delete(
+        `/api/posts/${postId}`,
         {
           data: { password },
         }
@@ -21,7 +22,8 @@ const DeleteGroupModal = ({ handleCloseModal }) => {
 
       // 서버에서 성공적인 응답을 받은 경우
       if (response.status === 200 || response.status === 201) {
-        alert("그룹이 성공적으로 삭제되었습니다!");
+        alert("추억이 성공적으로 삭제되었습니다!");
+        nav(`/group`);
         handleCloseModal();
       } else {
         throw new Error(response.data.message || "Failed");

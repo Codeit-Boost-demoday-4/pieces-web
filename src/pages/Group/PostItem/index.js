@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { PostLayout, InfoContainer, Title, TagList } from "./styles";
-import api from "../../../api.js"; // axios 인스턴스
 
 const PostItem = ({
   handleClick,
@@ -12,6 +11,16 @@ const PostItem = ({
   moment,
   showImage, // showImage prop 추가
 }) => {
+  // moment를 JavaScript Date 객체로 변환
+  const postDate = new Date(moment);
+  
+  // 날짜를 "yyyy-mm-dd" 형식으로 변환
+  const dateString = postDate.toLocaleDateString([], {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+
   return (
     <PostLayout onClick={handleClick}>
       {showImage && <img src={imageUrl} alt={title} />} {/* showImage에 따라 이미지 표시 */}
@@ -27,7 +36,7 @@ const PostItem = ({
         </TagList>
         <div>
           <span>{location}</span>
-          <span>{moment}</span>
+          <span>{dateString}</span> {/* 날짜만 표시 */}
         </div>
       </InfoContainer>
     </PostLayout>

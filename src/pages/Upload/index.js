@@ -22,13 +22,13 @@ import {
 } from "./styles.js";
 import closeButton from "../../assets/close-button.svg";
 import deleteTagImage from "../../assets/memories/태그삭제.png"; // 태그 삭제 버튼 이미지 불러오기
+import defaultImage from "../../assets/1.png"; // 기본 이미지
 import AuthModal from "./AuthModal/index.js";
 import { LogoTopBar } from "../../components/LogoTopBar/index.js";
-import axios from "axios";
+import api from "../../api.js"; // axios 인스턴스
 
 const Upload = () => {
-  const groupId = useParams(); // URL에서 groupId를 가져옴
-  //const groupId = 1;
+  const { groupId } = useParams(); // URL에서 groupId를 추출
   const nav = useNavigate();
 
   const [isPublic, setIsPublic] = useState(true);
@@ -43,7 +43,7 @@ const Upload = () => {
   const [content, setContent] = useState("");
   const [postPassword, setPostPassword] = useState("");
   //const [groupPassword, setGroupPassword] = useState("");
-  const [imageUrl, setImageUrl] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
   const [location, setLocation] = useState("");
   const [moment, setMoment] = useState("");
 
@@ -109,22 +109,22 @@ const Upload = () => {
         content,
         postPassword,
         groupPassword, // AuthModal에서 받은 groupPassword 사용
-        imageUrl,
+        imageUrl: imageUrl || defaultImage, // 이미지가 없으면 기본 이미지 사용
         tags,
         location,
         moment,
         isPublic,
       };
 
-      const response = await axios.post(
-        `https://pieces-server.onrender.com/api/groups/${groupId}/posts`,
+      const response = await api.post(
+        `/api/groups/${groupId}/posts`,
         postData
       );
 
       // 서버에서 성공적인 응답을 받은 경우
       if (response.status === 200 || response.status === 201) {
-        alert("추억이 성공적으로 업로드되었습니다!");
-        nav(`group/${groupId}`);
+        //alert("추억이 성공적으로 업로드되었습니다!");
+        nav(`/group/${groupId}`);
       } else {
         throw new Error(response.data.message || "Failed");
       }

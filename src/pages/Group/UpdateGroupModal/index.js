@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   ModalOverlay,
@@ -19,14 +19,15 @@ import {
   EditSubmitButton,
   EditSuccessMessage,
 } from "./styles.js";
-import axios from "axios";
+import api from "../../../api.js"; // axios 인스턴스
 import closeButton from "../../../assets/close-button.svg";
 
 const UpdateGroupModal = ({ handleCloseModal }) => {
   const { groupId } = useParams();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(""); // 현재 선택된 이미지 URL
+  const [originalImageUrl, setOriginalImageUrl] = useState(""); // 초기 이미지 URL
   const [isPublic, setIsPublic] = useState(true);
   const [introduction, setIntroduction] = useState("");
   const [isSwitchOn, setIsSwitchOn] = useState(true);
@@ -34,6 +35,29 @@ const UpdateGroupModal = ({ handleCloseModal }) => {
   const [isEditSuccess, setIsEditSuccess] = useState(false);
 
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    const fetchGroupInfo = async () => {
+      try {
+        const response = await api.get(`/api/groups/${groupId}`);
+        if (response.status === 200) {
+          const groupData = response.data;
+          setName(groupData.name || "");
+          setOriginalImageUrl(groupData.imageUrl || ""); // 초기 이미지 URL 저장
+          setImageUrl(groupData.imageUrl || ""); // 현재 이미지 URL 설정
+          setIsPublic(groupData.isPublic);
+          setIntroduction(groupData.introduction || "");
+          setIsSwitchOn(groupData.isPublic);
+        } else {
+          throw new Error("Failed to fetch group data");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchGroupInfo();
+  }, [groupId]);
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
@@ -52,17 +76,14 @@ const UpdateGroupModal = ({ handleCloseModal }) => {
     setIsLoading(true);
     try {
       const groupData = {
-        name,
-        password,
-        imageUrl,
-        isPublic,
-        introduction,
+        name: name || undefined, // 이름이 비어있으면 undefined로 설정
+        password: password || undefined, // 비밀번호가 비어있으면 undefined로 설정
+        imageUrl: imageUrl === originalImageUrl ? originalImageUrl : imageUrl, // 이미지 URL이 변경되지 않은 경우 원래 URL 사용
+        isPublic: isPublic, // 공개 여부
+        introduction: introduction || undefined, // 소개가 비어있으면 undefined로 설정
       };
 
-      const response = await axios.put(
-        `https://pieces-server.onrender.com/api/groups/${groupId}`,
-        groupData
-      );
+      const response = await api.put(`/api/groups/${groupId}`, groupData);
 
       if (response.status === 200 || response.status === 201) {
         alert("그룹 정보가 성공적으로 수정되었습니다!");
@@ -106,7 +127,9 @@ const UpdateGroupModal = ({ handleCloseModal }) => {
               accept="image/*"
               onChange={handleFileSelect}
             />
-            <FileSelectButton>파일 선택</FileSelectButton>
+            <FileSelectButton onClick={() => fileInputRef.current.click()}>
+              파일 선택
+            </FileSelectButton>
           </ImageUpload>
         </Container>
 

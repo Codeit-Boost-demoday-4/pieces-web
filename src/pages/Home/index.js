@@ -11,8 +11,6 @@ import {
   LoadMoreBtn,
 } from "./styles.js";
 import logo from '../../assets/memories/logo.png';
-import PostItem from '../Group/PostItem/index.js';
-import { dummyPosts } from "../Group/dummyPosts.js";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,7 +32,7 @@ const Home = () => {
           keyword: searchQuery,
         },
       });
-      
+
       const { data, currentPage, totalPages } = response.data;
 
       setGroups((prevGroups) => (pageNumber === 1 ? data : [...prevGroups, ...data]));
@@ -61,27 +59,21 @@ const Home = () => {
     navigate("/makegroup");
   };
 
-  const handleGroupClick = (groupId) => {
-    navigate(`/group/${groupId}`);
+  useEffect(() => {
+    fetchGroups(isPublicView, 1);
+  }, [isPublicView, searchQuery]);
+
+  const handleGroupClick = async (groupId, isPublic) => {
+    if (isPublic || isPublicView) {
+      navigate(`/group/${groupId}`);
+    } else {
+      navigate(`/groupauth/${groupId}`);
+    }
   };
 
   const LogoComponent = () => {
     return <img src={logo} alt="Logo" style={{ display: 'block', margin: '0 auto' }} />;
   };
-
-  const handlePostClick = (post) => {
-    if (isPublicView) {
-      handleGroupClick(post.groupId); // post 객체에서 groupId를 가져옵니다.
-    } else {
-      navigate("/GroupAuth");
-    }
-  };
-
-  const filteredPosts = dummyPosts.filter(
-    (post) =>
-      post.isPublic === isPublicView &&
-      (post.title.includes(searchQuery) || post.tags.some(tag => tag.includes(searchQuery)))
-  );
 
   return (
     <>
@@ -113,18 +105,23 @@ const Home = () => {
 
           <PostsList>
             {groups.map((group) => (
-              <div key={group.id} onClick={() => handleGroupClick(group.id)}>
-                <img src={group.imageUrl} alt={group.name} />
+              <div key={group.id} onClick={() => handleGroupClick(group.id, group.isPublic)}>
+                {/* 비공개 그룹의 경우 imgUrl을 조건적으로 렌더링 */}
+                {isPublicView || group.isPublic ? (
+                  <img src={group.imageUrl} alt={group.name} />
+                ) : null}
                 <h3>{group.name}</h3>
                 <p>{group.introduction}</p>
-                <div>좋아요: {group.likeCount}</div>
-                <div>뱃지: {group.badgeCount}</div>
-                <div>포스트: {group.postCount}</div>
-                <div>생성일: {new Date(group.createdAt).toLocaleDateString()}</div>
+                <span className="info-row">
+                  <span>공감: {group.likeCount}</span>
+                  <span>뱃지: {group.badgeCount}</span>
+                  <span>포스트: {group.postCount}</span>
+                </span>
+                <span className="date-row">생성일: {new Date(group.createdAt).toLocaleDateString()}</span>
               </div>
             ))}
           </PostsList>
-          
+
           {page < totalPages && (
             <LoadMoreBtn onClick={loadMoreGroups} disabled={loading}>
               {loading ? "로딩 중..." : "더보기"}

@@ -18,7 +18,7 @@ class App extends React.Component {
           <Route path="/group/:groupId/upload" element={<Upload />} />
           <Route path="/posts/:postId" element={<Post />} />
           <Route path="/makegroup" element={<MakeGroup />} />
-          <Route path="/groupauth" element={<GroupAuth />} />
+          <Route path="/groupauth/:groupId" element={<GroupAuth />} />
         </Routes>
       </Router>
     );

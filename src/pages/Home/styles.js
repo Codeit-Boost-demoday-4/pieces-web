@@ -141,6 +141,63 @@ export const PostsList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  div {
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+    background: #fafafa;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    padding: 15px; /* 내부 여백 추가 */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 왼쪽 정렬 */
+  }
+
+  img {
+    width: 335px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 3px;
+  }
+  h3 {
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20.03px;
+    letter-spacing: -0.03em;
+    text-align: left;
+    margin-bottom: 2px; /* 그룹 이름 아래 간격 */
+  }
+  p {
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.03px;
+    letter-spacing: -0.03em;
+    text-align: left;
+    margin-bottom: 5px; /* 그룹 인트로덕션 아래 간격 */
+  }
+  .info-row {
+    display: flex; /* 한 줄로 배치 */
+    gap: 10px; /* 각 항목 사이에 간격 */
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 12px;
+    font-weight: 400;
+    color: #999999; /* 회색 글씨 */
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  .date-row {
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17.53px;
+    letter-spacing: -0.03em;
+    text-align: left;
+    color: #333333;
+  }
 `;
 
 export const Post = styled.div`
