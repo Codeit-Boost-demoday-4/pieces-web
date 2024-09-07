@@ -96,13 +96,16 @@ const Post = () => {
       <LogoTopBar />
 
       {isEditing && (
-        <EditModal isOpen={isEditing} onClose={() => setIsEditing(false)} />
+        <EditModal
+          isOpen={isEditing}
+          handleCloseModal={() => setIsEditing(false)}
+        />
       )}
 
       {isDeleting && (
         <DeleteModal
           isOpen={isDeleting}
-          onClose={() => setIsDeleting(false)}
+          handleCloseModal={() => setIsDeleting(false)}
           onConfirm={() => {
             alert("포스트가 삭제되었습니다.");
             setIsDeleting(false);
@@ -135,7 +138,11 @@ const Post = () => {
         </div>
 
         <div className="post-container">
-          <img src={post.imageUrl || postimage} alt="PostImage" className="post-image" />
+          <img
+            src={post.imageUrl || postimage}
+            alt="PostImage"
+            className="post-image"
+          />
           <p className="post-content">{post.content}</p>
           <button
             onClick={() => setIsCommenting(true)}
