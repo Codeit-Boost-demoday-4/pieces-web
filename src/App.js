@@ -5,7 +5,7 @@ import Group from "./pages/Group"; // 경로 수정
 import Upload from "./pages/Upload"; // 경로 수정
 import Post from "./pages/Post";
 
-import MakeGroup from "./pages/Home/makegroup";
+import MakeGroup from "./pages/Home/MakeGroup";
 import GroupAuth from "./pages/Home/GroupAuth";
 
 class App extends React.Component {
