@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../../../api.js"; // axios 인스턴스
 import closeButton from "../../../assets/close-button.svg";
 import {
@@ -15,6 +15,7 @@ import {
 
 const DeleteGroupModal = ({ handleCloseModal }) => {
   const { groupId } = useParams();
+  const navigate = useNavigate(); // useNavigate 훅 사용
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -31,6 +32,7 @@ const DeleteGroupModal = ({ handleCloseModal }) => {
       if (response.status === 200 || response.status === 201) {
         alert("그룹이 성공적으로 삭제되었습니다!");
         handleCloseModal();
+        navigate("/"); 
       } else {
         throw new Error(response.data.message || "Failed");
       }

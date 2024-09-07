@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../api.js"; // axios 인스턴스
 import "./styles.css";
 import { LogoTopBar } from "../../components/LogoTopBar/index.js";
 
 const MakeGroup = () => {
+  const navigate = useNavigate(); // useNavigate 훅 사용
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -38,10 +40,16 @@ const MakeGroup = () => {
         introduction,
       };
 
-      const response = await api.post(``, groupData);
+      const response = await api.post(`/api/groups`, groupData);
 
       if (response.status === 200 || response.status === 201) {
         alert("그룹이 성공적으로 생성되었습니다!");
+
+        // 생성된 그룹 ID를 가져옵니다. (예: response.data.groupId)
+        const createdGroupId = response.data.id;
+
+        // 그룹 페이지로 리다이렉트합니다.
+        navigate(`/group/${createdGroupId}`);
       } else {
         throw new Error(response.data.message || "Failed");
       }
@@ -56,7 +64,7 @@ const MakeGroup = () => {
   return (
     <div className="container">
       <LogoTopBar />
-      <h2 className="modal-title">그룹 만들기</h2>
+      <h2 className="group-post-title">그룹 만들기</h2>
 
       <div className="form-container">
         <div className="container">
