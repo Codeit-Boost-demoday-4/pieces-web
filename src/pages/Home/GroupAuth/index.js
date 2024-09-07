@@ -39,20 +39,23 @@ const GroupAuth = () => {
   return (
     <div className="auth-container">
       <LogoTopBar /> {/* LogoTopBar 추가 */}
-      <h2 className="auth-title">권한 인증</h2>
-      <div className="container">
-        <label className="auth-label">비밀번호 입력</label>
-        <input
-          type="password"
-          className="auth-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="비밀번호를 입력해 주세요"
-        />
+      <div className="content">
+        <h2 className="auth-title">비공개 그룹</h2>
+        <span> 비공개 그룹에 접근하기 위해 권한 확인이 필요합니다</span>
+        <div className="container">
+          <label className="auth-label">비밀번호 입력</label>
+          <input
+            type="password"
+            className="auth-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="비밀번호를 입력해 주세요"
+          />
+        </div>
+        <button className="auth-submit-button" onClick={handleAuth}>
+          {isLoading ? "인증 중" : "제출하기"}
+        </button>
       </div>
-      <button className="auth-submit-button" onClick={handleAuth}>
-        {isLoading ? "인증 중" : "인증하기"}
-      </button>
       {message && <p className="auth-message">{message}</p>}
     </div>
   );
