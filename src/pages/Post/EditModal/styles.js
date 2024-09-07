@@ -160,9 +160,14 @@ export const TagText = styled.span`
   margin-right: 5px;
 `;
 
-export const DeleteIcon = styled.img`
+export const DeleteIcon = styled.button`
+  display: flex;
+  background-color: transparent;
+  border: none;
   width: 16px;
   height: 16px;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 `;
 

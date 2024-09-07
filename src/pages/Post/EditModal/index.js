@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   ModalWrapper,
   ModalContent,
@@ -25,9 +26,11 @@ import closeButton from "../../../assets/close-button.svg";
 import api from "../../../api.js"; // axios 인스턴스
 
 const EditModal = ({ handleCloseModal }) => {
+  const { postId } = useParams();
+
   const [nickname, setNickname] = useState("");
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
   const [tags, setTags] = useState([]);
   const [location, setLocation] = useState("");
   const [moment, setMoment] = useState("");
@@ -37,6 +40,31 @@ const EditModal = ({ handleCloseModal }) => {
   const [inputValue, setInputValue] = useState(""); // 태그 입력 상태
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef(null); // 파일 선택을 위한 ref
+
+  useEffect(() => {
+    const fetchPostInfo = async () => {
+      try {
+        const response = await api.get(`/api/posts/${postId}`);
+        if (response.status === 200) {
+          const postData = response.data;
+          setNickname(postData.nickname || "");
+          setTitle(postData.title || "");
+          setContent(postData.content || "");
+          setImage(postData.imageUrl || ""); // 이미지 URL 설정
+          setTags(postData.tags || []);
+          setLocation(postData.location || "");
+          setMoment(postData.moment || "");
+          setIsPublic(postData.isPublic);
+        } else {
+          throw new Error("Failed to fetch group data");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPostInfo();
+  }, [postId]);
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
@@ -83,7 +111,7 @@ const EditModal = ({ handleCloseModal }) => {
         isPublic,
       };
 
-      const response = await api.put(`/api/groups/1/posts`, postData); // groupId를 임시로 1로 지정
+      const response = await api.put(`/api/posts/${postId}`, postData); // groupId를 임시로 1로 지정
 
       if (response.status === 200 || response.status === 201) {
         alert("추억이 성공적으로 수정되었습니다!");
@@ -93,7 +121,7 @@ const EditModal = ({ handleCloseModal }) => {
       }
     } catch (error) {
       console.error(error);
-      alert("업로드에 실패했습니다. 다시 시도해주세요.");
+      alert("수정에 실패했습니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }
