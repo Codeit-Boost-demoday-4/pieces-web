@@ -64,7 +64,7 @@ const MakeGroup = () => {
   return (
     <div className="container">
       <LogoTopBar />
-      <h2 className="group-post-title">그룹 만들기</h2>
+      <h2 className="modal-title">그룹 만들기</h2>
 
       <div className="form-container">
         <div className="container">
